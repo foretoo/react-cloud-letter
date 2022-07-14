@@ -1,0 +1,26 @@
+{
+  "name": "cloud-letter",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.30.6",
+    "@typescript-eslint/parser": "^5.30.6",
+    "@vitejs/plugin-react": "^2.0.0",
+    "eslint": "^8.19.0",
+    "sass": "^1.53.0",
+    "typescript": "^4.6.4",
+    "vite": "^3.0.0"
+  }
+}

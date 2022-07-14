@@ -1,0 +1,22 @@
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="256"
+  height="256"
+  viewBox="0 0 22 22"
+  stroke-width="2"
+  stroke-linejoin="round"
+  stroke-linecap="round"
+>
+  <style>
+    path, circle { fill: blue; stroke: white }
+    @media (prefers-color-scheme: dark) {
+      path, circle { fill: white; stroke: blue }
+    }
+  </style>
+  <path
+    d="M1 6a5,5 0 0,1 10,0a5,5 0 0,0 5,5a5,5 0 0,1 0,10h-10a5,5 0 0,1-5-5Z"
+  >
+  </path>
+  <circle cx="16" cy="6" r="5" />
+</svg>

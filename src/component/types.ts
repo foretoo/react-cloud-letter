@@ -14,7 +14,7 @@ type CSSFontProperties = Partial<{
 }>
 
 type CloudLetterProps = {
-  children: JSX.Element | JSX.Element[] | string | null
+  children: JSX.Element | string | (string | JSX.Element)[] | null
   width: string
   spaceWidth: string
   fontStyle?: CSSFontProperties

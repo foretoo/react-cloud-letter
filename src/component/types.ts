@@ -20,12 +20,8 @@ type CloudLetterProps = {
   fontStyle?: CSSFontProperties
 }
 
-type CloudRect = {
-  x: number
-  y: number
-  w: number
-  h: number
-}
+type Point = [ number, number ]
+type CloudRect = [[ Point, Point, Point, Point ]]
 
 type CloudCanvasProps = {
   width: number

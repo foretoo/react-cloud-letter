@@ -1,5 +1,5 @@
 import { Fragment, CSSProperties, useState, useEffect, useRef } from "react"
-import { CloudCanvasProps, CloudLetterProps } from "./types"
+import { CloudCanvasProps, CloudLetterProps, CloudRect } from "./types"
 import { CloudWord } from "./cloud-word"
 import { CloudSpace } from "./cloud-space"
 import { CloudCanvas } from "./cloud-canvas"
@@ -21,12 +21,12 @@ const CloudLetter = ({
   useEffect(() => {
     const cloudRects = cloudsRef.current.map(({
       offsetLeft, offsetTop, offsetWidth, offsetHeight
-    }) => ({
-      x: offsetLeft,
-      y: offsetTop,
-      w: offsetWidth,
-      h: offsetHeight
-    }))
+    }) => ([[
+      [offsetLeft, offsetTop],
+      [offsetLeft + offsetWidth, offsetTop],
+      [offsetLeft + offsetWidth, offsetTop + offsetHeight],
+      [offsetLeft, offsetTop + offsetHeight]
+    ]] as CloudRect))
     const { offsetWidth: width, offsetHeight: height } = letterRef.current!
     setData({ width, height, cloudRects })
   }, [ content, width, spaceWidth, fontStyle ])

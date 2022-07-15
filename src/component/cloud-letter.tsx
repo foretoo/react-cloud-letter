@@ -1,4 +1,4 @@
-import { Fragment, CSSProperties } from "react"
+import { Fragment, CSSProperties, useRef } from "react"
 import { CloudLetterProps } from "./types"
 import { CloudWord } from "./cloud-word"
 import { CloudSpace } from "./cloud-space"
@@ -13,13 +13,15 @@ const CloudLetter = ({
   fontStyle
 }: CloudLetterProps) => {
 
+  const cloudsRef = useRef<HTMLSpanElement[]>([])
+
   if (typeof content === "string") {
     const words = content.match(/[^\s]+/g)
     content = words
     ? words.map((word, i) => (
       <Fragment key={`${i}-${word}`}>
         {i > 0 && <CloudSpace/>}
-        <CloudWord>{word}</CloudWord>
+        <CloudWord ref={cloudsRef}>{word}</CloudWord>
       </Fragment>
     ))
     : null
@@ -36,5 +38,6 @@ const CloudLetter = ({
 }
 
 export {
-  CloudLetter
+  CloudLetter,
+  CloudWord,
 }

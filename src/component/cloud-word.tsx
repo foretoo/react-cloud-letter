@@ -1,9 +1,18 @@
+
+import { forwardRef, MutableRefObject } from "react"
 import { CloudWordProps } from "./types"
 
-
-
-export const CloudWord = ({
-  children: content
-}: CloudWordProps) => {
-    return <span className="cloud-word">{content}</span>
-}
+export const CloudWord = forwardRef(({
+  children: content,
+}: CloudWordProps, ref) => {
+  return (
+    <span
+      className="cloud-word"
+      ref={(cloud) => {
+        (ref as MutableRefObject<HTMLSpanElement[]>).current.push(cloud!)
+      }}
+    >
+      {content}
+    </span>
+  )
+})

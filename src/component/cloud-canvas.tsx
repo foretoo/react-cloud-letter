@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef } from "react"
 import { CloudCanvasProps } from "./types"
+import polyBool from "polygon-clipping"
 
 export const CloudCanvas = ({
   width, height, cloudRects
@@ -17,10 +18,9 @@ export const CloudCanvas = ({
     
     const ctx = canvas.getContext("2d")!
     ctx.fillStyle = "blue"
-    cloudRects.forEach(({ x, y, w, h }) => {
-      ctx.beginPath()
-      ctx.fillRect(x * pr, y * pr, w * pr, h * pr)
-    })
+    const poly = polyBool.union(...cloudRects)
+    console.log(poly);
+    
   }, [ width, height, cloudRects ])
 
   return (

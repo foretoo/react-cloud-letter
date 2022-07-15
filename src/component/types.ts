@@ -17,7 +17,7 @@ type CloudLetterProps = {
   children: JSX.Element | JSX.Element[] | string | null,
   width: string,
   spaceWidth: string,
-  fontStyle: CSSFontProperties
+  fontStyle?: CSSFontProperties
 }
 
 export {

@@ -20,15 +20,22 @@ type CloudLetterProps = {
   fontStyle?: CSSFontProperties
 }
 
-type CloudData = {
+type CloudRect = {
   x: number
   y: number
   w: number
   h: number
 }
 
+type CloudCanvasProps = {
+  width: number
+  height: number
+  cloudRects: CloudRect[]
+}
+
 export {
   type CloudWordProps,
   type CloudLetterProps,
-  type CloudData,
+  type CloudRect,
+  type CloudCanvasProps,
 }

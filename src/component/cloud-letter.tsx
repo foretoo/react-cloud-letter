@@ -1,7 +1,8 @@
-import { Fragment, CSSProperties, useState, useLayoutEffect, useRef } from "react"
-import { CloudData, CloudLetterProps } from "./types"
+import { Fragment, CSSProperties, useState, useEffect, useRef } from "react"
+import { CloudCanvasProps, CloudLetterProps } from "./types"
 import { CloudWord } from "./cloud-word"
 import { CloudSpace } from "./cloud-space"
+import { CloudCanvas } from "./cloud-canvas"
 import "./cloud.sass"
 
 
@@ -13,20 +14,21 @@ const CloudLetter = ({
   fontStyle,
 }: CloudLetterProps) => {
 
-  const [ data, setData ] = useState<CloudData[]>([])
+  const [ data, setData ] = useState<CloudCanvasProps | null>(null)
+  const letterRef = useRef<HTMLParagraphElement>(null)
   const cloudsRef = useRef<HTMLSpanElement[]>([])
 
-  useLayoutEffect(() => {
-    setData(
-      cloudsRef.current.map(({
-        offsetLeft, offsetTop, offsetWidth, offsetHeight
-      }) => ({
-        x: offsetLeft,
-        y: offsetTop,
-        w: offsetWidth,
-        h: offsetHeight
-      }))
-    )
+  useEffect(() => {
+    const cloudRects = cloudsRef.current.map(({
+      offsetLeft, offsetTop, offsetWidth, offsetHeight
+    }) => ({
+      x: offsetLeft,
+      y: offsetTop,
+      w: offsetWidth,
+      h: offsetHeight
+    }))
+    const { offsetWidth: width, offsetHeight: height } = letterRef.current!
+    setData({ width, height, cloudRects })
   }, [ content, width, spaceWidth, fontStyle ])
 
   if (typeof content === "string") {
@@ -43,10 +45,12 @@ const CloudLetter = ({
 
   return (
     <p
+      ref={letterRef}
       className="cloud-letter"
       style={{ width, "--gap": spaceWidth, ...fontStyle } as CSSProperties}
     >
       {content}
+      {data && <CloudCanvas {...data} />}
     </p>
   )
 }

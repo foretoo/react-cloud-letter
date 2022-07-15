@@ -4,9 +4,9 @@
   "description": "reactwritten cloud letter",
   "keywords": [ "react", "component", "library", "cloud", "word", "unite", "round", "corner" ],
   "author": {
-    "name" : "Sergey Borovikov",
-    "email" : "foretoo@proton.me",
-    "url" : "https://foretoo.github.io"
+    "name": "Sergey Borovikov",
+    "email": "foretoo@proton.me",
+    "url": "https://foretoo.github.io"
   },
   "license": "MIT",
   "type": "module",

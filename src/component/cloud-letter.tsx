@@ -1,8 +1,8 @@
+import { Fragment, CSSProperties } from "react"
 import { CloudLetterProps } from "./types"
 import { CloudWord } from "./cloud-word"
 import { CloudSpace } from "./cloud-space"
 import "./cloud.sass"
-import { Fragment } from "react"
 
 
 
@@ -10,6 +10,7 @@ const CloudLetter = ({
   children: content,
   width,
   spaceWidth,
+  fontStyle
 }: CloudLetterProps) => {
 
   if (typeof content === "string") {
@@ -27,7 +28,7 @@ const CloudLetter = ({
   return (
     <p
       className="cloud-letter"
-      style={{ width, "--gap": spaceWidth } as React.CSSProperties}
+      style={{ width, "--gap": spaceWidth, ...fontStyle } as CSSProperties}
     >
       {content}
     </p>

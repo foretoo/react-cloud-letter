@@ -14,13 +14,21 @@ type CSSFontProperties = Partial<{
 }>
 
 type CloudLetterProps = {
-  children: JSX.Element | JSX.Element[] | string | null,
-  width: string,
-  spaceWidth: string,
+  children: JSX.Element | JSX.Element[] | string | null
+  width: string
+  spaceWidth: string
   fontStyle?: CSSFontProperties
+}
+
+type CloudData = {
+  x: number
+  y: number
+  w: number
+  h: number
 }
 
 export {
   type CloudWordProps,
   type CloudLetterProps,
+  type CloudData,
 }

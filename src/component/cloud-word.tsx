@@ -1,19 +1,18 @@
 
-import { forwardRef, ForwardedRef, MutableRefObject } from "react"
+import { useContext } from "react"
+import { cloudContext } from "./context"
 import { CloudWordProps } from "./types"
 
-export const CloudWord = forwardRef((
-  { children: content }: CloudWordProps,
-  ref: ForwardedRef<HTMLSpanElement[]>
-) => {
+export const CloudWord = ({
+  children: content
+}: CloudWordProps) => {
+  const cloudRects = useContext(cloudContext)
   return (
     <span
       className="cloud-word"
-      ref={(span) => {
-        (ref as MutableRefObject<HTMLSpanElement[]>).current.push(span!)
-      }}
+      ref={(span) => cloudRects.push(span!)}
     >
       {content}
     </span>
   )
-})
+}

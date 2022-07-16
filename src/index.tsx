@@ -1,14 +1,11 @@
-import React from "react"
 import ReactDOM from "react-dom/client"
-import { CloudLetter } from "./component/cloud-letter"
+import { CloudLetter, CloudWord } from "./component/cloud-letter"
 import "./index.sass"
 
 const root = ReactDOM.createRoot(document.getElementById("root")!)
 
 root.render(
-  <React.StrictMode>
-    <CloudLetter width="200px" spaceWidth="20px">
-      Initial Text For Cloud Lettering
-    </CloudLetter>
-  </React.StrictMode>,
+  <CloudLetter width="200px" spaceWidth="20px">
+    Initial  <CloudWord>Text</CloudWord> <CloudWord>For</CloudWord> <CloudWord>Cloudy</CloudWord> Lettering
+  </CloudLetter>
 )

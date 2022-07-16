@@ -2,7 +2,7 @@ type CloudWordProps = {
   children: string
 }
 
-type CSSFontProperties = Partial<{
+type CSSWordProperties = Partial<{
   font: string
   fontFamily: string
   fontSize: string
@@ -11,13 +11,14 @@ type CSSFontProperties = Partial<{
   fontWeight: string
   fontStretch: string
   lineHeight: string
+  padding: string
 }>
 
 type CloudLetterProps = {
   children: JSX.Element | string | (string | JSX.Element)[] | null
   width: string
   spaceWidth: string
-  fontStyle?: CSSFontProperties
+  wordStyle?: CSSWordProperties
 }
 
 type Point = [ number, number ]

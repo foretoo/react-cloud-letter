@@ -1,3 +1,1 @@
-export const CloudSpace = () => {
-    return <span className="cloud-space"> </span>
-}
+export const CloudSpace = () => <span className="cloud-space"> </span>

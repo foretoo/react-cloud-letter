@@ -1,4 +1,3 @@
-
 import { useContext } from "react"
 import { cloudContext } from "./context"
 import { CloudWordProps } from "./types"

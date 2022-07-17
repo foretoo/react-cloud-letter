@@ -1,8 +1,11 @@
 import { CSSProperties, useState, useEffect, useRef } from "react"
 import { CloudCanvasProps, CloudLetterProps, CloudRect } from "./types"
-import { split, IdleOrSpace, WordOrSpace } from "./helpers"
+import { split, elementSetter } from "./helpers"
 import { cloudContext } from "./context"
 import { CloudWord } from "./cloud-word"
+import { CloudSpace } from "./cloud-space"
+import { CloudWordIdle } from "./cloud-word-idle"
+import { CloudSpaceIdle } from "./cloud-space-idle"
 import { CloudCanvas } from "./cloud-canvas"
 import "./cloud.sass"
 
@@ -14,12 +17,19 @@ const CloudLetter = (
     width,
     spaceWidth,
     wordStyle,
+    mode = "WORD",
   }: CloudLetterProps
 ) => {
 
   const [ data, setData ] = useState<CloudCanvasProps | null>(null)
   const letterRef = useRef<HTMLParagraphElement>(null)
   const spansRef = useRef<HTMLSpanElement[]>([])
+
+  const setFilled = mode === "WORD"
+    ? elementSetter(CloudWord, CloudSpaceIdle)
+    : elementSetter(CloudWordIdle, CloudSpace)
+
+  const setIdle = elementSetter(CloudWordIdle, CloudSpaceIdle)
 
   useEffect(() => {
     const cloudRects = spansRef.current.map((
@@ -39,14 +49,13 @@ const CloudLetter = (
 
 
   if (typeof content === "string") {
-    content = split(content).map(WordOrSpace)
+    content = split(content).map(setFilled)
   }
   else if (Array.isArray(content)) {
     content = content.reduce((acc: JSX.Element[], element) => {
-      if (typeof element === "string")
-        split(element).forEach((idleOrSpace, i) => acc.push(IdleOrSpace(idleOrSpace, i)))
-      else
-        acc.push(element)
+      typeof element === "string"
+        ? split(element).forEach((idles, i) => acc.push(setIdle(idles, i)))
+        : acc.push(element)
       return acc
     }, [])
   }

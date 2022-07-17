@@ -12,6 +12,9 @@ type CSSWordProperties = Partial<{
   fontStretch: string
   lineHeight: string
   padding: string
+  fill: string
+  stroke: string
+  strokeWidth: number
 }>
 
 type CloudLetterProps = {

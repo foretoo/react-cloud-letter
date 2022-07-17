@@ -14,11 +14,15 @@ CloudLetterProps = {
     fontVariant: string
     fontWeight: string
     fontStretch: string
-    // props below
+    // lineHeight, padding props below
     // should be integers in px units
     // to get predictable behaviour
     lineHeight: string
     padding: string
+
+    fill: string
+    stroke: string
+    strokeWidth: number
   }
 }
 ```

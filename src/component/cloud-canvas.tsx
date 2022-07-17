@@ -8,6 +8,7 @@ export const CloudCanvas = (
 ) => {
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const l = 2
 
   useLayoutEffect(() => {
 
@@ -17,9 +18,16 @@ export const CloudCanvas = (
     canvas.height = (height + 1) * pr
     canvas.style.width = `${width}px`
     canvas.style.height = `${height + 1}px`
+    canvas.style.top = canvas.style.left = "0px"
+
     const ctx = canvas.getContext("2d")!
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    ctx.fillStyle = "blue"
+    ctx.fillStyle = "green"
+    if (l) {
+      ctx.lineJoin ="round"
+      ctx.strokeStyle = "pink"
+      ctx.lineWidth = l * pr
+    }
 
     const multiMerged: MultiPolygon = polygonBoolean.union(...cloudRects)
 
@@ -48,6 +56,7 @@ export const CloudCanvas = (
         })
       })
       ctx.fill()
+      ctx.stroke()
     })
 
   }, [ width, height, cloudRects ])

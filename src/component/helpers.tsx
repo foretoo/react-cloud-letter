@@ -1,22 +1,17 @@
 import { CloudWordProps } from "./types"
-import { CloudWord } from "./cloud-word"
-import { CloudSpace } from "./cloud-space"
-import { CloudWordIdle } from "./cloud-word-idle"
 
 
 
-const getElement = (
-  Component: (props: CloudWordProps) => JSX.Element
+export const elementSetter = (
+  WordComponent: (props: CloudWordProps) => JSX.Element,
+  SpaceComponent: () => JSX.Element,
 ) => (
-  element: string, i: number
+  element: string, i: number,
 ) => (
   element === " "
-    ? <CloudSpace key={`${i}-$space`}/>
-    : <Component key={`${i}-${element}`}>{element}</Component>
+    ? <SpaceComponent key={`${i}-space`}/>
+    : <WordComponent key={`${i}-${element}`}>{element}</WordComponent>
 )
-
-export const WordOrSpace = getElement(CloudWord)
-export const IdleOrSpace = getElement(CloudWordIdle)
 
 
 

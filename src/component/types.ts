@@ -19,6 +19,7 @@ type CloudLetterProps = {
   width: string
   spaceWidth: string
   wordStyle?: CSSWordProperties
+  mode?: "WORD" | "SPACE"
 }
 
 type Point = [ number, number ]

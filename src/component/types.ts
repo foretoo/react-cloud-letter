@@ -2,16 +2,20 @@ type CloudWordProps = {
   children: string
 }
 
-type CSSWordProperties = Partial<{
-  font: string
-  fontFamily: string
-  fontSize: string
-  fontStyle: string
-  fontVariant: string
-  fontWeight: string
-  fontStretch: string
-  lineHeight: string
-  padding: string
+// type CSSWordProperties = Partial<{
+//   color: string
+//   font: string
+//   fontFamily: string
+//   fontSize: string
+//   fontStyle: string
+//   fontVariant: string
+//   fontWeight: string
+//   fontStretch: string
+//   lineHeight: string
+//   padding: string
+// }>
+
+type CloudStyle = Partial<{
   fill: string
   stroke: string
   strokeWidth: number
@@ -21,7 +25,8 @@ type CloudLetterProps = {
   children: JSX.Element | string | (string | JSX.Element)[] | null
   width: string
   spaceWidth: string
-  wordStyle?: CSSWordProperties
+  // wordStyle?: CSSWordProperties
+  cloudStyle?: CloudStyle
   mode?: "WORD" | "SPACE"
 }
 

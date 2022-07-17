@@ -16,7 +16,7 @@ const CloudLetter = (
     children: content,
     width,
     spaceWidth,
-    wordStyle,
+    cloudStyle,
     mode = "WORD",
   }: CloudLetterProps
 ) => {
@@ -44,7 +44,7 @@ const CloudLetter = (
     ))
     const { offsetWidth: width, offsetHeight: height } = letterRef.current!
     setData({ width, height, cloudRects })
-  }, [ content, width, spaceWidth, wordStyle ])
+  }, [ content, width, spaceWidth ])
 
 
 
@@ -66,7 +66,7 @@ const CloudLetter = (
     <p
       ref={letterRef}
       className="cloud-letter"
-      style={{ width, "--gap": spaceWidth, ...wordStyle } as CSSProperties}
+      style={{ width, "--gap": spaceWidth } as CSSProperties}
     >
       <cloudContext.Provider value={spansRef.current}>
         {content}

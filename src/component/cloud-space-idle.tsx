@@ -1,0 +1,1 @@
+export const CloudSpaceIdle = () => <span className="cloud-space"> </span>

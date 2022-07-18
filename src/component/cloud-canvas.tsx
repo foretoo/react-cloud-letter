@@ -11,7 +11,7 @@ export const CloudCanvas = (
   const l = cloudStyle?.strokeWidth || 2
   const sy = 4
   const sx = -2
-  const sc = "#f74"
+  const sc = "#47f"
 
   useLayoutEffect(() => {
 
@@ -52,7 +52,6 @@ export const CloudCanvas = (
           roundPolygon(poly, 7)
         ))
       ))
-
 
     const offsetY = sy < 0 ? (-sy > l/2 ? -sy : l/2) : l/2
     const offsetX = sx < 0 ? (-sx > l/2 ? -sx : l/2) : l/2

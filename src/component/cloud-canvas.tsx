@@ -10,6 +10,7 @@ export const CloudCanvas = (
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const l = cloudStyle?.strokeWidth || 2
   const sy = 4
+  const sc = "#f74"
 
   useLayoutEffect(() => {
 
@@ -29,7 +30,7 @@ export const CloudCanvas = (
     ctx.fillStyle = cloudStyle?.fill || "white"
     if (l > 0) {
       ctx.lineJoin = "round"
-      ctx.strokeStyle = cloudStyle?.stroke || "black"
+      ctx.strokeStyle = cloudStyle?.stroke || sc
       ctx.lineWidth = l * pr
     }
     else ctx.strokeStyle = "transparent"
@@ -53,7 +54,6 @@ export const CloudCanvas = (
 
 
     const offsetY = sy < 0 ? (-sy > l/2 ? -sy : l/2) : l/2
-    console.log(offsetY);
     ctx.translate(l/2 * pr, offsetY * pr)
     multiRoundedPolies.forEach((roundedPolies) => {
       ctx.beginPath()
@@ -65,7 +65,7 @@ export const CloudCanvas = (
         })
       })
       ctx.shadowOffsetY = sy * pr
-      ctx.shadowColor = "black"
+      ctx.shadowColor = sc
       ctx.fill()
       ctx.shadowOffsetY = 0
       ctx.stroke()

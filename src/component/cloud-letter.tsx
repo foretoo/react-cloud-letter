@@ -47,7 +47,9 @@ const CloudLetter = (
     const deno = h / 2 | 0 // <-- denominator
 
     spaceWidthRef.current = Math.round(spaceWidth / deno) * deno
+
     spansRef.current.forEach((span) => {
+      mode === "SPACE" && (span.style.width = `${spaceWidthRef.current}px`)
       let { width: w } = span.getBoundingClientRect()
       w = Math.ceil(w / deno) * deno
       span.style.width = `${w}px`

@@ -3,14 +3,14 @@ import { CloudLetter, CloudWord } from "./component/cloud-letter"
 import { text1, text2 } from "./component/text"
 
 const width = window.innerWidth
-const mineText = "Initial Text  For   Cloudy    Lettering"
+const mineText = "The origin of the term \"cloud\" can be found in the Old English words clud or clod, meaning a hill or a mass of stone."
 
 export const App = () => {
 
   const [ content, setContent ] = useState(mineText)
   const [ mode, setMode ] = useState<"WORD" | "SPACE">("WORD")
-  const [ align, setAlign ] = useState<"left" | "center" | "right">("left")
-  const [ spaceWidth, setSpaceWidth ] = useState(40)
+  const [ align, setAlign ] = useState<"left" | "center" | "right">("right")
+  const [ spaceWidth, setSpaceWidth ] = useState(78)
 
   const handleInput = (e: FormEvent<HTMLTextAreaElement>) => {
     const target = e.target as HTMLTextAreaElement

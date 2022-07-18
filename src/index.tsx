@@ -12,7 +12,7 @@ if (import.meta.hot) {
 }
 
 root.render(
-  <CloudLetter width={`${width}px`} spaceWidth="40px">
+  <CloudLetter width={width*0.9} spaceWidth={40} align="left" cloudStyle={{ strokeWidth: 8.7 }} >
     {text}
     {/* Initial  <CloudWord>Text</CloudWord> <CloudWord>For</CloudWord> <CloudWord>Cloudy</CloudWord> Lettering */}
     {/* Initial  Text   For Cloudy  Lettering */}

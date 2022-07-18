@@ -20,11 +20,41 @@ html, body, #root
   place-items: center
   overflow: auto
 
-textarea
-  padding: 0.4rem 0.4rem
-  outline: none
-  border: solid 2px black
-  border-radius: 0.5rem
-  font-size: 0.8rem
-  line-height: 1.2em
-  resize: none
+form.controls
+  border: 2px solid #47f
+  border-radius: 7px
+  background-color: #fff
+
+  *
+    font-size: 0.8rem
+    line-height: 1.2em
+
+  input
+    display: block
+
+  > fieldset.controls-row
+    display: flex
+    align-items: center
+    gap: 0.4rem
+    padding: 0.4rem 0.4rem
+
+    > label
+      display: flex
+      align-items: center
+      gap: 0.4rem
+
+      > input
+        &[type=radio]
+          // margin-right: 0.4rem
+        &[type=range]
+          // margin-left: auto
+          flex-grow: 1
+
+  > textarea
+    display: block
+    padding: 0.4rem 0.4rem
+    outline: none
+    border-top: 2px solid #47f
+    border-bottom: 2px solid #47f
+    background-color: transparent
+    resize: none

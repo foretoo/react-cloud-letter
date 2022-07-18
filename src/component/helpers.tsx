@@ -7,11 +7,13 @@ export const elementSetter = (
   SpaceComponent: () => JSX.Element,
 ) => (
   element: string, i: number,
-) => (
-  element === " "
-    ? <SpaceComponent key={`${i}-space`}/>
-    : <WordComponent key={`${i}-${element}`}>{element}</WordComponent>
-)
+) => {
+  return element.match(/\n/g)
+    ? <br key={`${i}-break`} />
+    : element === " "
+      ? <SpaceComponent key={`${i}-space`}/>
+      : <WordComponent key={`${i}-${element}`}>{element}</WordComponent>
+}
 
 
 

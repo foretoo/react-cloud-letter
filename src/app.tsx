@@ -9,6 +9,7 @@ export const App = () => {
 
   const [ content, setContent ] = useState(mineText)
   const [ mode, setMode ] = useState<"WORD" | "SPACE">("WORD")
+  const [ align, setAlign ] = useState<"left" | "center" | "right">("left")
   const [ spaceWidth, setSpaceWidth ] = useState(40)
 
   const handleInput = (e: FormEvent<HTMLTextAreaElement>) => {
@@ -18,6 +19,10 @@ export const App = () => {
   const handleModeChange = (e: FormEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement
     setMode(target.value as "WORD" | "SPACE")
+  }
+  const handleAlignChange = (e: FormEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement
+    setAlign(target.value as "left" | "center" | "right")
   }
   const handleRangeChange = (e: FormEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement
@@ -29,6 +34,7 @@ export const App = () => {
       <CloudLetter
         width={Math.min(width*0.8, 1024)}
         spaceWidth={spaceWidth}
+        align={align}
         mode={mode}
       >
         {content}
@@ -36,7 +42,7 @@ export const App = () => {
       </CloudLetter>
 
       <form className="controls">
-        <fieldset className="controls-row">
+        <fieldset className="controls-row mode">
           <span>mode:</span>
           <label>
             <input
@@ -60,6 +66,40 @@ export const App = () => {
           </label>
         </fieldset>
 
+        <fieldset className="controls-row align">
+          <span>align:</span>
+          <label>
+            <input
+              type="radio"
+              name="align"
+              value="left"
+              checked={align === "left"}
+              onChange={handleAlignChange}
+            />
+            left
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="align"
+              value="center"
+              checked={align === "center"}
+              onChange={handleAlignChange}
+            />
+            center
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="align"
+              value="right"
+              checked={align === "right"}
+              onChange={handleAlignChange}
+            />
+            right
+          </label>
+        </fieldset>
+
         <textarea
           rows={5}
           cols={Math.min(width/15|0, 55)}
@@ -68,9 +108,9 @@ export const App = () => {
           onInput={handleInput}
         />
 
-        <fieldset className="controls-row">
+        <fieldset className="controls-row space-width">
           <label>
-            <span>space width</span>
+            space width
             <input
               type="range"
               min={0}

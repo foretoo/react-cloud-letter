@@ -9,13 +9,13 @@
   stroke-linecap="round"
 >
   <style>
-    path, circle { fill: blue; stroke: white }
+    path, circle { fill: white; stroke: #44f }
     @media (prefers-color-scheme: dark) {
-      path, circle { fill: white; stroke: blue }
+      path, circle { fill: #44f; stroke: white }
     }
   </style>
   <path
-    d="M1 6a5,5 0 0,1 10,0a5,5 0 0,0 5,5a5,5 0 0,1 0,10h-10a5,5 0 0,1-5-5Z"
+    d="M1 6a5,5 0 0,1 10,0a5,5 0 0,0 5,5a5,5 0 0,1 0,10h-8a7,7 0 0,1-7-7Z"
   >
   </path>
   <circle cx="16" cy="6" r="5" />

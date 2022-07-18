@@ -23,8 +23,9 @@ type CloudStyle = Partial<{
 
 type CloudLetterProps = {
   children: JSX.Element | string | (string | JSX.Element)[] | null
-  width: string
-  spaceWidth: string
+  width: number
+  spaceWidth: number
+  align?: "left" | "center" | "right"
   // wordStyle?: CSSWordProperties
   cloudStyle?: CloudStyle
   mode?: "WORD" | "SPACE"
@@ -37,6 +38,7 @@ type CloudCanvasProps = {
   width: number
   height: number
   cloudRects: CloudRect[]
+  cloudStyle?: CloudStyle
 }
 
 export {

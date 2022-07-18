@@ -33,17 +33,21 @@ const CloudLetter = (
   const setIdle = elementSetter(CloudWordIdle, CloudSpaceIdle)
 
   useEffect(() => {
-    const cloudRects = spansRef.current.map((
-      { offsetLeft: x, offsetTop: y, offsetWidth: w, offsetHeight: h }
-    ) => (
-      [[
-        [ x,     y     ],
-        [ x + w, y     ],
-        [ x + w, y + h ],
-        [ x,     y + h ],
-      ]] as CloudRect
-    ))
-    const { offsetWidth: width, offsetHeight: height } = letterRef.current!
+    const { height, top, left } = letterRef.current!.getBoundingClientRect()
+    const cloudRects = spansRef.current.map((span) => {
+      let { x, y, width: w, height: h } = span.getBoundingClientRect()
+      x -= left
+      y -= top
+      return (
+        [[
+          [ x,     y     ],
+          [ x + w, y     ],
+          [ x + w, y + h ],
+          [ x,     y + h ],
+        ]] as CloudRect
+      )
+    })
+
     setData({ width, height, cloudRects, cloudStyle })
   }, [ content, width, spaceWidth, align ])
 

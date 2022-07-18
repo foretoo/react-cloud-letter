@@ -8,7 +8,7 @@ export const CloudWord = ({
   const cloudRects = useContext(cloudContext)
   return (
     <span
-      className="cloud-word"
+      className="cloud-element word"
       ref={(span) => cloudRects.push(span!)}
     >
       {content}

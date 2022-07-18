@@ -5,7 +5,7 @@ export const CloudSpace = () => {
   const cloudRects = useContext(cloudContext)
   return (
     <span
-      className="cloud-space"
+      className="cloud-element space"
       ref={(span) => cloudRects.push(span!)}
     >
       {" "}

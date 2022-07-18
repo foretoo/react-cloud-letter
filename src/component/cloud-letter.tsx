@@ -23,8 +23,10 @@ const CloudLetter = (
 ) => {
 
   const [ data, setData ] = useState<CloudCanvasProps | null>(null)
+  const [ triggerSetData, toggleTrigger ] = useState(false)
   const letterRef = useRef<HTMLParagraphElement>(null)
   const spansRef = useRef<HTMLSpanElement[]>([])
+  const spaceWidthRef = useRef(spaceWidth)
 
   const setFilled = mode === "WORD"
     ? elementSetter(CloudWord, CloudSpaceIdle)
@@ -33,23 +35,37 @@ const CloudLetter = (
   const setIdle = elementSetter(CloudWordIdle, CloudSpaceIdle)
 
   useEffect(() => {
-    const { height, top, left } = letterRef.current!.getBoundingClientRect()
-    const cloudRects = spansRef.current.map((span) => {
-      let { x, y, width: w, height: h } = span.getBoundingClientRect()
-      x -= left
-      y -= top
-      return (
-        [[
-          [ x,     y     ],
-          [ x + w, y     ],
-          [ x + w, y + h ],
-          [ x,     y + h ],
-        ]] as CloudRect
-      )
+    const { height: h } = spansRef.current[0].getBoundingClientRect()
+    const hh = h / 2 | 0
+    spaceWidthRef.current = Math.round(spaceWidth / hh) * hh
+    spansRef.current.forEach((span) => {
+      let { width: w } = span.getBoundingClientRect()
+      w = Math.ceil(w / hh) * hh
+      span.style.width = `${w}px`
     })
-
-    setData({ width, height, cloudRects, cloudStyle })
+    toggleTrigger(!triggerSetData)
   }, [ content, width, spaceWidth, align ])
+
+  useEffect(() => {
+    if (triggerSetData) {
+      const { height, top, left } = letterRef.current!.getBoundingClientRect()
+      const cloudRects = spansRef.current.map((span) => {
+        let { x, y, width: w, height: h } = span.getBoundingClientRect()
+        x -= left
+        y -= top
+        return (
+          [[
+            [ x,     y     ],
+            [ x + w, y     ],
+            [ x + w, y + h ],
+            [ x,     y + h ],
+          ]] as CloudRect
+        )
+      })
+      setData({ width, height, cloudRects, cloudStyle })
+      toggleTrigger(!triggerSetData)
+    }
+  }, [ triggerSetData ])
 
 
 
@@ -73,7 +89,7 @@ const CloudLetter = (
       className="cloud-letter"
       style={{
           "width": `${width}px`,
-          "--gap": `${spaceWidth}px`,
+          "--gap": `${spaceWidthRef.current}px`,
           "--align": align
         } as CSSProperties
       }

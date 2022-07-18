@@ -9,23 +9,30 @@ export const CloudCanvas = (
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const l = cloudStyle?.strokeWidth || 2
+  const sy = 4
 
   useLayoutEffect(() => {
 
     const pr = window.devicePixelRatio
     const canvas = canvasRef.current!
-    canvas.width = (width + l) * pr
-    canvas.height = (height + 1 + l) * pr
-    canvas.style.width = `${width + l}px`
-    canvas.style.height = `${height + 1 + l}px`
-    canvas.style.top = canvas.style.left = `${-l/2}px`
+    const _width = width + l
+    const _height = height + (Math.abs(sy) > l/2 ? Math.abs(sy) + l/2 : l)
+    canvas.width = _width * pr
+    canvas.height = _height * pr
+    canvas.style.width = `${_width}px`
+    canvas.style.height = `${_height}px`
+    canvas.style.top = `${sy < 0 ? (-sy > l/2 ? sy : -l/2) : -l/2}px`
+    canvas.style.left = `${-l/2}px`
 
     const ctx = canvas.getContext("2d")!
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     ctx.fillStyle = cloudStyle?.fill || "white"
-    ctx.lineJoin = "round"
-    ctx.strokeStyle = cloudStyle?.stroke || "black"
-    ctx.lineWidth = l * pr
+    if (l > 0) {
+      ctx.lineJoin = "round"
+      ctx.strokeStyle = cloudStyle?.stroke || "black"
+      ctx.lineWidth = l * pr
+    }
+    else ctx.strokeStyle = "transparent"
 
     const multiMerged: MultiPolygon = polygonBoolean.union(...cloudRects)
 
@@ -44,7 +51,10 @@ export const CloudCanvas = (
         ))
       ))
 
-    ctx.translate(l/2 * pr, l/2 * pr)
+
+    const offsetY = sy < 0 ? (-sy > l/2 ? -sy : l/2) : l/2
+    console.log(offsetY);
+    ctx.translate(l/2 * pr, offsetY * pr)
     multiRoundedPolies.forEach((roundedPolies) => {
       ctx.beginPath()
       roundedPolies.forEach((roundedPoly) => {
@@ -54,7 +64,10 @@ export const CloudCanvas = (
           ctx.lineTo(p.next.in.x * pr, p.next.in.y * pr)
         })
       })
+      ctx.shadowOffsetY = sy * pr
+      ctx.shadowColor = "black"
       ctx.fill()
+      ctx.shadowOffsetY = 0
       ctx.stroke()
     })
     ctx.setTransform(1, 0, 0, 1, 0, 0)

@@ -27,6 +27,12 @@ const CloudLetter = (
   const letterRef = useRef<HTMLParagraphElement>(null)
   const spansRef = useRef<HTMLSpanElement[]>([])
   const spaceWidthRef = useRef(spaceWidth)
+  const modeRef = useRef(mode)
+
+  if (modeRef.current !== mode) {
+    spansRef.current.length = 0
+    modeRef.current = mode
+  }
 
   const setFilled = mode === "WORD"
     ? elementSetter(CloudWord, CloudSpaceIdle)
@@ -48,7 +54,7 @@ const CloudLetter = (
     })
 
     toggleTrigger(!triggerSetData)
-  }, [ content, width, spaceWidth, align ])
+  }, [ content, width, spaceWidth, align, cloudStyle, mode ])
 
   // and then extract coordinates
   useEffect(() => {

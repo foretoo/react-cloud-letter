@@ -34,18 +34,23 @@ const CloudLetter = (
 
   const setIdle = elementSetter(CloudWordIdle, CloudSpaceIdle)
 
+  // find common denominator
+  // and set widths of all elements with respect to it
   useEffect(() => {
     const { height: h } = spansRef.current[0].getBoundingClientRect()
-    const hh = h / 2 | 0
-    spaceWidthRef.current = Math.round(spaceWidth / hh) * hh
+    const deno = h / 2 | 0 // <-- denominator
+
+    spaceWidthRef.current = Math.round(spaceWidth / deno) * deno
     spansRef.current.forEach((span) => {
       let { width: w } = span.getBoundingClientRect()
-      w = Math.ceil(w / hh) * hh
+      w = Math.ceil(w / deno) * deno
       span.style.width = `${w}px`
     })
+
     toggleTrigger(!triggerSetData)
   }, [ content, width, spaceWidth, align ])
 
+  // and then extract coordinates
   useEffect(() => {
     if (triggerSetData) {
       const { height, top, left } = letterRef.current!.getBoundingClientRect()

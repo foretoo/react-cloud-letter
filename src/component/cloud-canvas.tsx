@@ -4,30 +4,28 @@ import polygonBoolean, { MultiPolygon } from "polygon-clipping"
 import roundPolygon, { InitPoint, RoundedPoint } from "round-polygon"
 
 export const CloudCanvas = (
-  { width, height, cloudRects }: CloudCanvasProps
+  { width, height, cloudRects, cloudStyle }: CloudCanvasProps
 ) => {
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const l = 2
+  const l = cloudStyle?.strokeWidth || 2
 
   useLayoutEffect(() => {
 
     const pr = window.devicePixelRatio
     const canvas = canvasRef.current!
-    canvas.width = width * pr
-    canvas.height = (height + 1) * pr
-    canvas.style.width = `${width}px`
-    canvas.style.height = `${height + 1}px`
-    canvas.style.top = canvas.style.left = "0px"
+    canvas.width = (width + l) * pr
+    canvas.height = (height + 1 + l) * pr
+    canvas.style.width = `${width + l}px`
+    canvas.style.height = `${height + 1 + l}px`
+    canvas.style.top = canvas.style.left = `${-l/2}px`
 
     const ctx = canvas.getContext("2d")!
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    ctx.fillStyle = "green"
-    if (l) {
-      ctx.lineJoin ="round"
-      ctx.strokeStyle = "pink"
-      ctx.lineWidth = l * pr
-    }
+    ctx.fillStyle = cloudStyle?.fill || "white"
+    ctx.lineJoin = "round"
+    ctx.strokeStyle = cloudStyle?.stroke || "black"
+    ctx.lineWidth = l * pr
 
     const multiMerged: MultiPolygon = polygonBoolean.union(...cloudRects)
 
@@ -46,6 +44,7 @@ export const CloudCanvas = (
         ))
       ))
 
+    ctx.translate(l/2 * pr, l/2 * pr)
     multiRoundedPolies.forEach((roundedPolies) => {
       ctx.beginPath()
       roundedPolies.forEach((roundedPoly) => {
@@ -58,6 +57,7 @@ export const CloudCanvas = (
       ctx.fill()
       ctx.stroke()
     })
+    ctx.setTransform(1, 0, 0, 1, 0, 0)
 
   }, [ width, height, cloudRects ])
 

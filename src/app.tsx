@@ -1,13 +1,13 @@
 import { FormEvent, useState } from "react"
 import { CloudLetter, CloudWord } from "./component/cloud-letter"
-import { text } from "./component/text"
+import { text1, text2 } from "./component/text"
 
 const width = window.innerWidth
 const mineText = "Initial  Text   For Cloudy  Lettering"
 
 export const App = () => {
 
-  const [ content, setContent ] = useState("123\n123")
+  const [ content, setContent ] = useState(text2)
 
   const handleInput = (e: FormEvent<HTMLTextAreaElement>) => {
     const target = e.target as HTMLTextAreaElement
@@ -16,7 +16,7 @@ export const App = () => {
 
   return (
     <>
-      <CloudLetter width={Math.min(width*0.9, 500)} spaceWidth={40} >
+      <CloudLetter width={Math.min(width*0.8, 1024)} spaceWidth={40} >
         {content}
         {/* Initial  <CloudWord>Text</CloudWord> <CloudWord>For</CloudWord> <CloudWord>Cloudy</CloudWord> Lettering */}
       </CloudLetter>

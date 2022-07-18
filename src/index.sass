@@ -29,14 +29,14 @@ form.controls
     font-size: 0.8rem
     line-height: 1.2em
 
-  input
-    display: block
-
   > fieldset.controls-row
     display: flex
     align-items: center
     gap: 0.4rem
     padding: 0.4rem 0.4rem
+
+    &.align
+      border-top: 2px solid #47f
 
     > label
       display: flex
@@ -44,10 +44,7 @@ form.controls
       gap: 0.4rem
 
       > input
-        &[type=radio]
-          // margin-right: 0.4rem
         &[type=range]
-          // margin-left: auto
           flex-grow: 1
 
   > textarea

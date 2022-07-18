@@ -45,7 +45,7 @@ const CloudLetter = (
     ))
     const { offsetWidth: width, offsetHeight: height } = letterRef.current!
     setData({ width, height, cloudRects, cloudStyle })
-  }, [ content, width, spaceWidth ])
+  }, [ content, width, spaceWidth, align ])
 
 
 

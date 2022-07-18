@@ -9,7 +9,7 @@ export const CloudWord = ({
   return (
     <span
       className="cloud-element word"
-      ref={(span) => cloudRects.push(span!)}
+      ref={(span) => span && !cloudRects.includes(span) && cloudRects.push(span)}
     >
       {content}
     </span>

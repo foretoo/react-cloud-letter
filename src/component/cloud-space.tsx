@@ -6,7 +6,7 @@ export const CloudSpace = () => {
   return (
     <span
       className="cloud-element space"
-      ref={(span) => cloudRects.push(span!)}
+      ref={(span) => span && !cloudRects.includes(span) && cloudRects.push(span)}
     >
       {" "}
     </span>

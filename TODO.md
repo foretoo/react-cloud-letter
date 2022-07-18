@@ -1,0 +1,1 @@
+- store both words ans spaces refs, handle their widths, and grab data from mode related only

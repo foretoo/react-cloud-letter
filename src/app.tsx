@@ -1,14 +1,32 @@
+import { FormEvent, useState } from "react"
 import { CloudLetter, CloudWord } from "./component/cloud-letter"
 import { text } from "./component/text"
 
 const width = window.innerWidth
+const mineText = "Initial  Text   For Cloudy  Lettering"
 
 export const App = () => {
+
+  const [ content, setContent ] = useState("123\n123")
+
+  const handleInput = (e: FormEvent<HTMLTextAreaElement>) => {
+    const target = e.target as HTMLTextAreaElement
+    setContent(target.value)
+  }
+
   return (
-    <CloudLetter width={width*0.9} spaceWidth={40} >
-      {text}
-      {/* Initial  <CloudWord>Text</CloudWord> <CloudWord>For</CloudWord> <CloudWord>Cloudy</CloudWord> Lettering */}
-      {/* Initial  Text   For Cloudy  Lettering */}
-    </CloudLetter>
+    <>
+      <CloudLetter width={Math.min(width*0.9, 500)} spaceWidth={40} >
+        {content}
+        {/* Initial  <CloudWord>Text</CloudWord> <CloudWord>For</CloudWord> <CloudWord>Cloudy</CloudWord> Lettering */}
+      </CloudLetter>
+      <textarea
+        rows={7}
+        cols={Math.min(width/15|0, 55)}
+        value={content}
+        autoFocus={true}
+        onInput={handleInput}
+      />
+    </>
   )
 }

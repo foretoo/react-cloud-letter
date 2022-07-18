@@ -10,20 +10,21 @@ export const CloudCanvas = (
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const l = cloudStyle?.strokeWidth || 2
   const sy = 4
+  const sx = -2
   const sc = "#f74"
 
   useLayoutEffect(() => {
 
     const pr = window.devicePixelRatio
     const canvas = canvasRef.current!
-    const _width = width + l
+    const _width = width + (Math.abs(sx) > l/2 ? Math.abs(sx) + l/2 : l)
     const _height = height + (Math.abs(sy) > l/2 ? Math.abs(sy) + l/2 : l)
     canvas.width = _width * pr
     canvas.height = _height * pr
     canvas.style.width = `${_width}px`
     canvas.style.height = `${_height}px`
     canvas.style.top = `${sy < 0 ? (-sy > l/2 ? sy : -l/2) : -l/2}px`
-    canvas.style.left = `${-l/2}px`
+    canvas.style.left = `${sx < 0 ? (-sx > l/2 ? sx : -l/2) : -l/2}px`
 
     const ctx = canvas.getContext("2d")!
     ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -54,7 +55,8 @@ export const CloudCanvas = (
 
 
     const offsetY = sy < 0 ? (-sy > l/2 ? -sy : l/2) : l/2
-    ctx.translate(l/2 * pr, offsetY * pr)
+    const offsetX = sx < 0 ? (-sx > l/2 ? -sx : l/2) : l/2
+    ctx.translate(offsetX * pr, offsetY * pr)
     multiRoundedPolies.forEach((roundedPolies) => {
       ctx.beginPath()
       roundedPolies.forEach((roundedPoly) => {
@@ -64,9 +66,11 @@ export const CloudCanvas = (
           ctx.lineTo(p.next.in.x * pr, p.next.in.y * pr)
         })
       })
+      ctx.shadowOffsetX = sx * pr
       ctx.shadowOffsetY = sy * pr
       ctx.shadowColor = sc
       ctx.fill()
+      ctx.shadowOffsetX = 0
       ctx.shadowOffsetY = 0
       ctx.stroke()
     })

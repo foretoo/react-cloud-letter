@@ -32,7 +32,7 @@ export const App = () => {
   return (
     <>
       <CloudLetter
-        width={Math.min(width*0.8, 1024)}
+        width={Math.min(width*0.8, 512)}
         spaceWidth={spaceWidth}
         align={align}
         mode={mode}
@@ -100,25 +100,26 @@ export const App = () => {
           </label>
         </fieldset>
 
-        <textarea
-          rows={5}
-          cols={Math.min(width/15|0, 55)}
-          value={content}
-          autoFocus={true}
-          onInput={handleInput}
-        />
+        <fieldset className="controls-row content">
+          <span>content:</span>
+          <textarea
+            rows={3}
+            cols={Math.min(width/25|0, 55)}
+            value={content}
+            autoFocus={true}
+            onInput={handleInput}
+          />
+        </fieldset>
 
         <fieldset className="controls-row space-width">
-          <label>
-            space width
-            <input
-              type="range"
-              min={0}
-              max={100}
-              value={spaceWidth}
-              onInput={handleRangeChange}
-            />
-          </label>
+          <span>space width</span>
+          <input
+            type="range"
+            min={0}
+            max={100}
+            value={spaceWidth}
+            onInput={handleRangeChange}
+          />
         </fieldset>
       </form>
     </>

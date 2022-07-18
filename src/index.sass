@@ -34,24 +34,33 @@ form.controls
     align-items: center
     gap: 0.4rem
     padding: 0.4rem 0.4rem
+    border-top: 2px solid #47f
 
-    &.align
-      border-top: 2px solid #47f
+    &:first-child
+      border-top: none
+
+    &.space-width
+      > input[type=range]
+        flex-grow: 1
+
+    &.content
+      position: relative
+      align-items: flex-start
+
+      > span
+        position: absolute
+
+      > textarea
+        padding: 0
+        text-indent: 65px
+        outline: none
+        background-color: transparent
+        // resize: none
+
+    > span
+      color: #47f
 
     > label
       display: flex
       align-items: center
       gap: 0.4rem
-
-      > input
-        &[type=range]
-          flex-grow: 1
-
-  > textarea
-    display: block
-    padding: 0.4rem 0.4rem
-    outline: none
-    border-top: 2px solid #47f
-    border-bottom: 2px solid #47f
-    background-color: transparent
-    resize: none

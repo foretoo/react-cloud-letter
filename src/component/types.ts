@@ -37,6 +37,7 @@ type CloudRect = [[ Point, Point, Point, Point ]]
 type CloudCanvasProps = {
   width: number
   height: number
+  align: "left" | "center" | "right"
   cloudRects: CloudRect[]
   cloudStyle?: CloudStyle
 }

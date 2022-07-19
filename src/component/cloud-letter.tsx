@@ -75,7 +75,7 @@ const CloudLetter = (
           ]] as CloudRect
         )
       })
-      setData({ width, height, cloudRects, cloudStyle })
+      setData({ width, height, align, cloudRects, cloudStyle })
       toggleTrigger(!triggerSetData)
     }
   }, [ triggerSetData ])

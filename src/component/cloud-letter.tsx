@@ -51,7 +51,7 @@ const CloudLetter = (
   // and set widths of all elements with respect to it
   useEffect(() => {
     const { height: h } = spansRef.current[0].getBoundingClientRect()
-    const deno = h / 2 | 0 // <-- denominator
+    const deno = align === "center" ? h : h / 2 | 0 // <-- denominator
 
     spaceWidthRef.current = (Math.round(spaceWidth / deno) || 1) * deno
 

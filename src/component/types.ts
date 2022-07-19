@@ -45,6 +45,12 @@ type CloudCanvasProps = {
   cloudStyle?: CloudStyle
 }
 
+type CloudContext = {
+  every: HTMLSpanElement[]
+  words: HTMLSpanElement[]
+  spaces: HTMLSpanElement[]
+}
+
 export {
   type Mode,
   type Align,
@@ -52,4 +58,5 @@ export {
   type CloudLetterProps,
   type CloudRect,
   type CloudCanvasProps,
+  type CloudContext,
 }

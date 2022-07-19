@@ -1,3 +1,10 @@
 import { createContext } from "react"
+import { CloudContext } from "./types"
 
-export const cloudContext = createContext<HTMLSpanElement[]>([])
+const init = {
+  every: [],
+  words: [],
+  spaces: [],
+} as CloudContext
+
+export const cloudContext = createContext<CloudContext>(init)

@@ -26,12 +26,19 @@ const CloudLetter = (
   const [ triggerSetData, toggleTrigger ] = useState(false)
   const letterRef = useRef<HTMLParagraphElement>(null)
   const spansRef = useRef<HTMLSpanElement[]>([])
+
+  // additions
   const spaceWidthRef = useRef(spaceWidth)
+  const contentRef = useRef(content)
   const modeRef = useRef(mode)
 
-  if (modeRef.current !== mode) {
+  if (
+    modeRef.current !== mode ||
+    contentRef.current !== content
+  ) {
     spansRef.current.length = 0
     modeRef.current = mode
+    contentRef.current = content
   }
 
   const setFilled = mode === "WORD"

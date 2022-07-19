@@ -30,15 +30,18 @@ const CloudLetter = (
   // additions
   const spaceWidthRef = useRef(spaceWidth)
   const contentRef = useRef(content)
+  const alignRef = useRef(align)
   const modeRef = useRef(mode)
 
   if (
     modeRef.current !== mode ||
-    contentRef.current !== content
+    contentRef.current !== content ||
+    alignRef.current !== align
   ) {
     spansRef.current.length = 0
     modeRef.current = mode
     contentRef.current = content
+    alignRef.current = align
   }
 
   const setFilled = mode === "WORD"

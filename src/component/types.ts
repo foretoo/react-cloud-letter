@@ -21,14 +21,17 @@ type CloudStyle = Partial<{
   strokeWidth: number
 }>
 
+type Mode = "WORD" | "SPACE"
+type Align = "left" | "center" | "right"
+
 type CloudLetterProps = {
   children: JSX.Element | string | (string | JSX.Element)[] | null
   width: number
   spaceWidth: number
-  align?: "left" | "center" | "right"
+  align?: Align
   // wordStyle?: CSSWordProperties
   cloudStyle?: CloudStyle
-  mode?: "WORD" | "SPACE"
+  mode?: Mode
 }
 
 type Point = [ number, number ]
@@ -37,12 +40,14 @@ type CloudRect = [[ Point, Point, Point, Point ]]
 type CloudCanvasProps = {
   width: number
   height: number
-  align: "left" | "center" | "right"
+  align: Align
   cloudRects: CloudRect[]
   cloudStyle?: CloudStyle
 }
 
 export {
+  type Mode,
+  type Align,
   type CloudWordProps,
   type CloudLetterProps,
   type CloudRect,

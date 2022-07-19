@@ -6,12 +6,13 @@ p.cloud-letter
   border: 0
   box-sizing: border-box
   text-align: var(--align)
+  background-color: #0001
 
   > span
     &.cloud-element
       display: inline-block
       margin: 0
-      padding: 3px 9px
+      padding: 7px 16px
       border: 0
       box-sizing: border-box
 
@@ -24,8 +25,11 @@ p.cloud-letter
       white-space: pre
 
     &.cloud-element.space
-      padding: 0
+      padding: 7px 0
       width: var(--gap)
+
+    &.cloud-element.space.idle
+      padding: 0
 
   > canvas.cloud-canvas
     position: absolute

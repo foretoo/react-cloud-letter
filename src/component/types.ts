@@ -26,6 +26,7 @@ type CloudLetterProps = {
   children: JSX.Element | string | (string | JSX.Element)[] | null
   width: number
   spaceWidth: number
+  cloudHeight: number
   align?: Align
   // wordStyle?: CSSWordProperties
   fill?: string
@@ -40,6 +41,7 @@ type CloudRect = [[ Point, Point, Point, Point ]]
 type CloudCanvasProps = {
   width: number
   height: number
+  cloudHeight: number
   align: Align
   cloudRects: CloudRect[]
   fill: string

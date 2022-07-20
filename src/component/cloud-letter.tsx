@@ -28,12 +28,6 @@ const CloudLetter = (
 
   // helpers
   const spaceWidthRef = useRef(spaceWidth)
-  const modeRef = useRef(mode)
-
-  if (modeRef.current !== mode) {
-    everyRef.current.length = 0
-    modeRef.current = mode
-  }
 
 
 
@@ -42,14 +36,10 @@ const CloudLetter = (
   useEffect(() => {
     const { height: h } = everyRef.current[0].getBoundingClientRect()
     const deno = h / 2 | 0 // align === "center" ? h : h / 2 | 0 // <-- denominator
-    
-    // const sw = Math.ceil(spaceWidth / deno) * deno
-    // spacesRef.current.forEach((space) => {
-    //   space.style.width = `${sw}px`
-    // })
+
     spaceWidthRef.current = Math.ceil(spaceWidth / deno) * deno
 
-    everyRef.current.forEach((span) => {
+    wordsRef.current.forEach((span) => {
       let { width: w } = span.getBoundingClientRect()
       w = Math.ceil(w / deno) * deno
       span.style.width = `${w}px`
@@ -62,23 +52,22 @@ const CloudLetter = (
   useEffect(() => {
     if (triggerSetData) {
       const { height, top, left } = letterRef.current!.getBoundingClientRect()
-      const clouds = (mode === "WORD" ? wordsRef : spacesRef).current
-      const cloudRects = clouds.reduce((data: CloudRect[], span) => {
-        if (!span.idle) {
-          let { x, y, width: w, height: h } = span.getBoundingClientRect()
-          x -= left
-          y -= top
-          data.push(
-            [[
-              [ x,     y     ],
-              [ x + w, y     ],
-              [ x + w, y + h ],
-              [ x,     y + h ],
-            ]] as CloudRect
-          )
-        }
-        return data
-      }, [])
+      const clouds = mode === "WORD"
+        ? wordsRef.current.filter((span) => !span.idle)
+        : spacesRef.current
+      const cloudRects = clouds.map((span) => {
+        let { x, y, width: w, height: h } = span.getBoundingClientRect()
+        x -= left
+        y -= top
+        return (
+          [[
+            [ x,     y     ],
+            [ x + w, y     ],
+            [ x + w, y + h ],
+            [ x,     y + h ],
+          ]] as CloudRect
+        )
+      })
       setData({ width, height, align, cloudRects, cloudStyle })
       toggleTrigger(!triggerSetData)
     }

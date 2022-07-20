@@ -5,7 +5,7 @@ import roundPolygon, { InitPoint, RoundedPoint } from "round-polygon"
 import { canvasDebug } from "./helpers"
 
 export const CloudCanvas = (
-  { width, height, align, cloudRects, fill, stroke, strokeWidth }: CloudCanvasProps
+  { width, height, cloudHeight, align, cloudRects, fill, stroke, strokeWidth }: CloudCanvasProps
 ) => {
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -59,7 +59,7 @@ export const CloudCanvas = (
     const multiRoundedPolies: RoundedPoint[][][] =
       multiPolies.map((polies) => (
         polies.map((poly) => (
-          roundPolygon(poly, 7)
+          roundPolygon(poly, cloudHeight / 4)
         ))
       ))
 

@@ -1,10 +1,8 @@
 import { CSSProperties, useState, useEffect, useRef } from "react"
-import { CloudCanvasProps, CloudLetterProps, CloudRect } from "./types"
-import { split, elementSetter } from "./helpers"
+import { CloudCanvasProps, CloudLetterProps, CloudRect, SpanRef } from "./types"
+import { split, getCloudMapper } from "./helpers"
 import { cloudContext } from "./context"
 import { CloudWord } from "./cloud-word"
-import { CloudSpace } from "./cloud-space"
-import { CloudWordIdle } from "./cloud-word-idle"
 import { CloudCanvas } from "./cloud-canvas"
 import "./cloud.sass"
 
@@ -24,9 +22,9 @@ const CloudLetter = (
   const [ data, setData ] = useState<CloudCanvasProps | null>(null)
   const [ triggerSetData, toggleTrigger ] = useState(false)
   const letterRef = useRef<HTMLParagraphElement>(null)
-  const everyRef = useRef<HTMLSpanElement[]>([])
-  const wordsRef = useRef<HTMLSpanElement[]>([])
-  const spacesRef = useRef<HTMLSpanElement[]>([])
+  const everyRef = useRef<SpanRef[]>([])
+  const wordsRef = useRef<SpanRef[]>([])
+  const spacesRef = useRef<SpanRef[]>([])
 
   // helpers
   const spaceWidthRef = useRef(spaceWidth)
@@ -65,19 +63,22 @@ const CloudLetter = (
     if (triggerSetData) {
       const { height, top, left } = letterRef.current!.getBoundingClientRect()
       const clouds = (mode === "WORD" ? wordsRef : spacesRef).current
-      const cloudRects = clouds.map((span) => {
-        let { x, y, width: w, height: h } = span.getBoundingClientRect()
-        x -= left
-        y -= top
-        return (
-          [[
-            [ x,     y     ],
-            [ x + w, y     ],
-            [ x + w, y + h ],
-            [ x,     y + h ],
-          ]] as CloudRect
-        )
-      })
+      const cloudRects = clouds.reduce((data: CloudRect[], span) => {
+        if (!span.idle) {
+          let { x, y, width: w, height: h } = span.getBoundingClientRect()
+          x -= left
+          y -= top
+          data.push(
+            [[
+              [ x,     y     ],
+              [ x + w, y     ],
+              [ x + w, y + h ],
+              [ x,     y + h ],
+            ]] as CloudRect
+          )
+        }
+        return data
+      }, [])
       setData({ width, height, align, cloudRects, cloudStyle })
       toggleTrigger(!triggerSetData)
     }
@@ -86,14 +87,14 @@ const CloudLetter = (
 
 
   if (typeof content === "string") {
-    const setFilled = elementSetter(mode === "WORD" ? CloudWord : CloudWordIdle, CloudSpace)
-    content = split(content).map(setFilled)
+    const cloudMapper = getCloudMapper(mode === "WORD")
+    content = split(content).map(cloudMapper)
   }
   else if (Array.isArray(content)) {
-    const setIdle = elementSetter(CloudWordIdle, CloudSpace)
+    const idleMapper = getCloudMapper(false)
     content = content.reduce((acc: JSX.Element[], element, i) => {
       typeof element === "string"
-        ? split(element).forEach((idles, j) => acc.push(setIdle(idles, `${i}-${j}`)))
+        ? split(element).forEach((idles, j) => acc.push(idleMapper(idles, `${i}-${j}`)))
         : acc.push(element)
       return acc
     }, [])

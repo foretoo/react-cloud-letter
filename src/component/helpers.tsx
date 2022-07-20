@@ -6,7 +6,7 @@ export const elementSetter = (
   WordComponent: (props: CloudWordProps) => JSX.Element,
   SpaceComponent: () => JSX.Element,
 ) => (
-  element: string, i: number,
+  element: string, i: number | string,
 ) => {
   return element.match(/\n/g)
     ? <br key={`${i}-break`} />

@@ -91,9 +91,9 @@ const CloudLetter = (
   }
   else if (Array.isArray(content)) {
     const setIdle = elementSetter(CloudWordIdle, CloudSpace)
-    content = content.reduce((acc: JSX.Element[], element) => {
+    content = content.reduce((acc: JSX.Element[], element, i) => {
       typeof element === "string"
-        ? split(element).forEach((idles, i) => acc.push(setIdle(idles, i)))
+        ? split(element).forEach((idles, j) => acc.push(setIdle(idles, `${i}-${j}`)))
         : acc.push(element)
       return acc
     }, [])

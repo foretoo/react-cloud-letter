@@ -5,11 +5,16 @@ import { CloudWordProps } from "./types"
 export const CloudWord = ({
   children: content
 }: CloudWordProps) => {
-  const cloudRects = useContext(cloudContext)
+  const { every, words } = useContext(cloudContext)
   return (
     <span
       className="cloud-element word"
-      ref={(span) => span && !cloudRects.includes(span) && cloudRects.push(span)}
+      ref={(span) => {
+        if (span) {
+          !every.includes(span) && every.push(span!)
+          !words.includes(span) && words.push(span!)
+        }
+      }}
     >
       {content}
     </span>

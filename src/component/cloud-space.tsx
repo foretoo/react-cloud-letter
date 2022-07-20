@@ -2,11 +2,11 @@ import { useContext } from "react"
 import { cloudContext } from "./context"
 
 export const CloudSpace = () => {
-  const cloudRects = useContext(cloudContext)
+  const { every, spaces } = useContext(cloudContext)
   return (
     <span
       className="cloud-element space"
-      ref={(span) => span && !cloudRects.includes(span) && cloudRects.push(span)}
+      ref={(span) => span && !spaces.includes(span) && spaces.push(span)}
     >
       {" "}
     </span>

@@ -5,7 +5,6 @@ import { cloudContext } from "./context"
 import { CloudWord } from "./cloud-word"
 import { CloudSpace } from "./cloud-space"
 import { CloudWordIdle } from "./cloud-word-idle"
-import { CloudSpaceIdle } from "./cloud-space-idle"
 import { CloudCanvas } from "./cloud-canvas"
 import "./cloud.sass"
 
@@ -25,41 +24,34 @@ const CloudLetter = (
   const [ data, setData ] = useState<CloudCanvasProps | null>(null)
   const [ triggerSetData, toggleTrigger ] = useState(false)
   const letterRef = useRef<HTMLParagraphElement>(null)
-  const spansRef = useRef<HTMLSpanElement[]>([])
+  const everyRef = useRef<HTMLSpanElement[]>([])
+  const wordsRef = useRef<HTMLSpanElement[]>([])
+  const spacesRef = useRef<HTMLSpanElement[]>([])
 
-  // additions
+  // helpers
   const spaceWidthRef = useRef(spaceWidth)
-  const contentRef = useRef(content)
-  const alignRef = useRef(align)
   const modeRef = useRef(mode)
 
-  if (
-    modeRef.current !== mode ||
-    contentRef.current !== content ||
-    alignRef.current !== align
-  ) {
-    spansRef.current.length = 0
+  if (modeRef.current !== mode) {
+    everyRef.current.length = 0
     modeRef.current = mode
-    contentRef.current = content
-    alignRef.current = align
   }
 
-  const setFilled = mode === "WORD"
-    ? elementSetter(CloudWord, CloudSpaceIdle)
-    : elementSetter(CloudWordIdle, CloudSpace)
 
-  const setIdle = elementSetter(CloudWordIdle, CloudSpaceIdle)
 
   // find common denominator
   // and set widths of all elements with respect to it
   useEffect(() => {
-    const { height: h } = spansRef.current[0].getBoundingClientRect()
-    const deno = align === "center" ? h : h / 2 | 0 // <-- denominator
+    const { height: h } = everyRef.current[0].getBoundingClientRect()
+    const deno = h / 2 | 0 // align === "center" ? h : h / 2 | 0 // <-- denominator
+    
+    // const sw = Math.ceil(spaceWidth / deno) * deno
+    // spacesRef.current.forEach((space) => {
+    //   space.style.width = `${sw}px`
+    // })
+    spaceWidthRef.current = Math.ceil(spaceWidth / deno) * deno
 
-    spaceWidthRef.current = (Math.round(spaceWidth / deno) || 1) * deno
-
-    spansRef.current.forEach((span) => {
-      mode === "SPACE" && (span.style.width = `${spaceWidthRef.current}px`)
+    everyRef.current.forEach((span) => {
       let { width: w } = span.getBoundingClientRect()
       w = Math.ceil(w / deno) * deno
       span.style.width = `${w}px`
@@ -72,7 +64,8 @@ const CloudLetter = (
   useEffect(() => {
     if (triggerSetData) {
       const { height, top, left } = letterRef.current!.getBoundingClientRect()
-      const cloudRects = spansRef.current.map((span) => {
+      const clouds = (mode === "WORD" ? wordsRef : spacesRef).current
+      const cloudRects = clouds.map((span) => {
         let { x, y, width: w, height: h } = span.getBoundingClientRect()
         x -= left
         y -= top
@@ -93,9 +86,11 @@ const CloudLetter = (
 
 
   if (typeof content === "string") {
+    const setFilled = elementSetter(mode === "WORD" ? CloudWord : CloudWordIdle, CloudSpace)
     content = split(content).map(setFilled)
   }
   else if (Array.isArray(content)) {
+    const setIdle = elementSetter(CloudWordIdle, CloudSpace)
     content = content.reduce((acc: JSX.Element[], element) => {
       typeof element === "string"
         ? split(element).forEach((idles, i) => acc.push(setIdle(idles, i)))
@@ -117,7 +112,11 @@ const CloudLetter = (
         } as CSSProperties
       }
     >
-      <cloudContext.Provider value={spansRef.current}>
+      <cloudContext.Provider value={{
+        every: everyRef.current,
+        words: wordsRef.current,
+        spaces: spacesRef.current,
+      }}>
         {content}
       </cloudContext.Provider>
       {data && <CloudCanvas {...data} />}

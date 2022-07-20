@@ -14,9 +14,9 @@ const CloudLetter = (
     width,
     spaceWidth,
     align = "left",
-    fill,
-    stroke,
-    strokeWidth,
+    fill = "White",
+    stroke = "DodgerBlue",
+    strokeWidth = 2,
     mode = "WORD",
   }: CloudLetterProps
 ) => {

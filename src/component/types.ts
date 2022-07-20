@@ -42,9 +42,9 @@ type CloudCanvasProps = {
   height: number
   align: Align
   cloudRects: CloudRect[]
-  fill?: string
-  stroke?: string
-  strokeWidth?: number
+  fill: string
+  stroke: string
+  strokeWidth: number
 }
 
 type CloudContext = {

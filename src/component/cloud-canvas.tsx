@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef } from "react"
 import { CloudCanvasProps } from "./types"
 import polygonBoolean, { MultiPolygon } from "polygon-clipping"
 import roundPolygon, { InitPoint, RoundedPoint } from "round-polygon"
+import { canvasDebug } from "./helpers"
 
 export const CloudCanvas = (
   { width, height, align, cloudRects, fill, stroke, strokeWidth }: CloudCanvasProps
@@ -9,10 +10,10 @@ export const CloudCanvas = (
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const ctxRef = useRef<CanvasRenderingContext2D | null>(null)
-  const l = strokeWidth || 2
+  const l = strokeWidth
   const sy = 4
   const sx = -2
-  const sc = "#47f"
+  const sc = stroke
 
   useLayoutEffect(() => {
     ctxRef.current = canvasRef.current!.getContext("2d")
@@ -37,10 +38,10 @@ export const CloudCanvas = (
     const canvas = canvasRef.current!
 
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    ctx.fillStyle = fill || "white"
+    ctx.fillStyle = fill
     if (l > 0) {
       ctx.lineJoin = "round"
-      ctx.strokeStyle = stroke || sc
+      ctx.strokeStyle = stroke
       ctx.lineWidth = l * pr
     }
     else ctx.strokeStyle = "transparent"
@@ -82,6 +83,8 @@ export const CloudCanvas = (
       ctx.shadowOffsetY = 0
       ctx.stroke()
     })
+
+    // canvasDebug(ctx, width, height, align, cloudRects)
 
     ctx.setTransform(1, 0, 0, 1, 0, 0)
   }, [ cloudRects ])

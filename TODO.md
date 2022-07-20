@@ -1,9 +1,9 @@
-- handle align not by css rule, but by calculating positions
+- [x] store both words ans spaces refs, handle their widths, and grab data from mode related only
 
-- pass height of clouds (spans' line-heights) and hor.padding as props to CloudLetter
+- [x] handle center align by calculating positions
 
-- store both words ans spaces refs, handle their widths, and grab data from mode related only
+- [x] pass height of clouds (spans' line-heights) and hor.padding as props to CloudLetter
 
-- preserve initial widths of spans (when change align from center to left | right, widths of spans don't shrink)
+- ~~preserve initial widths of spans (when change align from center to left | right, widths of spans don't shrink)~~
 
 - ui in the clouds: grab data from children and draw its clouds via canvas on background 

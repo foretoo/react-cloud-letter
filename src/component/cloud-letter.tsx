@@ -14,12 +14,14 @@ const CloudLetter = (
     width,
     spaceWidth,
     align = "left",
-    cloudStyle,
+    fill,
+    stroke,
+    strokeWidth,
     mode = "WORD",
   }: CloudLetterProps
 ) => {
 
-  const [ data, setData ] = useState<CloudCanvasProps | null>(null)
+  const [ data, setData ] = useState<{ width: number, height: number, cloudRects: CloudRect[] } | null>(null)
   const [ triggerSetData, toggleTrigger ] = useState(false)
   const letterRef = useRef<HTMLParagraphElement>(null)
   const everyRef = useRef<SpanRef[]>([])
@@ -46,7 +48,7 @@ const CloudLetter = (
     })
 
     toggleTrigger(!triggerSetData)
-  }, [ content, width, spaceWidth, align, cloudStyle, mode ])
+  }, [ content, width, spaceWidth, align, mode ])
 
   // and then extract coordinates
   useEffect(() => {
@@ -68,7 +70,7 @@ const CloudLetter = (
           ]] as CloudRect
         )
       })
-      setData({ width, height, align, cloudRects, cloudStyle })
+      setData({ width, height, cloudRects })
       toggleTrigger(!triggerSetData)
     }
   }, [ triggerSetData ])
@@ -109,7 +111,13 @@ const CloudLetter = (
       }}>
         {content}
       </cloudContext.Provider>
-      {data && <CloudCanvas {...data} />}
+      {data && <CloudCanvas
+        {...data}
+        align={align}
+        fill={fill}
+        stroke={stroke}
+        strokeWidth={strokeWidth}
+      />}
     </p>
   )
 }

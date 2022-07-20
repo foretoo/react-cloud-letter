@@ -17,11 +17,7 @@ type SpanRef = HTMLSpanElement & { idle: boolean }
 //   padding: string
 // }>
 
-type CloudStyle = Partial<{
-  fill: string
-  stroke: string
-  strokeWidth: number
-}>
+
 
 type Mode = "WORD" | "SPACE"
 type Align = "left" | "center" | "right"
@@ -32,7 +28,9 @@ type CloudLetterProps = {
   spaceWidth: number
   align?: Align
   // wordStyle?: CSSWordProperties
-  cloudStyle?: CloudStyle
+  fill?: string
+  stroke?: string
+  strokeWidth?: number
   mode?: Mode
 }
 
@@ -44,7 +42,9 @@ type CloudCanvasProps = {
   height: number
   align: Align
   cloudRects: CloudRect[]
-  cloudStyle?: CloudStyle
+  fill?: string
+  stroke?: string
+  strokeWidth?: number
 }
 
 type CloudContext = {

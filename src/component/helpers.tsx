@@ -41,18 +41,16 @@ export const canvasDebug = (
   ctx.lineWidth = 1
 
   const h = cloudRects[0][0][2][1] - cloudRects[0][0][0][1]
-  const hh = align === "center" ? h : h / 2
+  const hh = h / 2
 
   const proceedX = (
     fn: (x: number, y: number) => void,
     y: number
   ) => {
-    if (align === "left")
+    if (align === "left" || align === "center")
       for (let x = 0; x < width; x+=hh) fn(x, y)
     else if (align === "right")
       for (let x = width; x > 0; x-=hh) fn(x, y)
-    else if (align === "center")
-      for (let x = min; x < width; x+=hh) fn(x, y)
   }
   const drawLine = (x: number, y: number) => {
     ctx.moveTo(x * pr, y * h * pr)

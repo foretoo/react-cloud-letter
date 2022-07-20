@@ -1,6 +1,8 @@
 type CloudWordProps = {
   children: string
+  idle?: boolean
 }
+type SpanRef = HTMLSpanElement & { idle: boolean }
 
 // type CSSWordProperties = Partial<{
 //   color: string
@@ -46,12 +48,13 @@ type CloudCanvasProps = {
 }
 
 type CloudContext = {
-  every: HTMLSpanElement[]
-  words: HTMLSpanElement[]
-  spaces: HTMLSpanElement[]
+  every: SpanRef[]
+  words: SpanRef[]
+  spaces: SpanRef[]
 }
 
 export {
+  type SpanRef,
   type Mode,
   type Align,
   type CloudWordProps,

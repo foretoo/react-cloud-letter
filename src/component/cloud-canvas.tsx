@@ -4,17 +4,21 @@ import polygonBoolean, { MultiPolygon } from "polygon-clipping"
 import roundPolygon, { InitPoint, RoundedPoint } from "round-polygon"
 
 export const CloudCanvas = (
-  { width, height, align, cloudRects, cloudStyle }: CloudCanvasProps
+  { width, height, align, cloudRects, fill, stroke, strokeWidth }: CloudCanvasProps
 ) => {
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const l = cloudStyle?.strokeWidth || 0
-  const sy = 0
-  const sx = 0
+  const ctxRef = useRef<CanvasRenderingContext2D | null>(null)
+  const l = strokeWidth || 2
+  const sy = 4
+  const sx = -2
   const sc = "#47f"
 
   useLayoutEffect(() => {
+    ctxRef.current = canvasRef.current!.getContext("2d")
+  }, [])
 
+  useLayoutEffect(() => {
     const pr = window.devicePixelRatio
     const canvas = canvasRef.current!
     const _width = width + (Math.abs(sx) > l/2 ? Math.abs(sx) + l/2 : l)
@@ -25,13 +29,18 @@ export const CloudCanvas = (
     canvas.style.height = `${_height}px`
     canvas.style.top = `${sy < 0 ? (-sy > l/2 ? sy : -l/2) : -l/2}px`
     canvas.style.left = `${sx < 0 ? (-sx > l/2 ? sx : -l/2) : -l/2}px`
+  }, [ width, height, strokeWidth, sx, sy ])
 
-    const ctx = canvas.getContext("2d")!
+  useLayoutEffect(() => {
+    const pr = window.devicePixelRatio
+    const ctx = ctxRef.current!
+    const canvas = canvasRef.current!
+
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    ctx.fillStyle = cloudStyle?.fill || "white"
+    ctx.fillStyle = fill || "white"
     if (l > 0) {
       ctx.lineJoin = "round"
-      ctx.strokeStyle = cloudStyle?.stroke || sc
+      ctx.strokeStyle = stroke || sc
       ctx.lineWidth = l * pr
     }
     else ctx.strokeStyle = "transparent"
@@ -74,59 +83,8 @@ export const CloudCanvas = (
       ctx.stroke()
     })
 
-    //// debug ////
-    let debug = true
-    if (debug) {
-
-      const findMin = () => (
-        cloudRects.reduce((min, curr) => (
-          curr[0][0][0] < min ? curr[0][0][0] : min
-        ), width)
-      )
-      const min = findMin()
-
-      ctx.strokeStyle = "#f74"
-      ctx.lineWidth = 1
-
-      const h = cloudRects[0][0][2][1] - cloudRects[0][0][0][1]
-      const hh = align === "center" ? h : h / 2
-
-      const proceedX = (
-        fn: (x: number, y: number) => void,
-        y: number
-      ) => {
-        if (align === "left")
-          for (let x = 0; x < width; x+=hh) fn(x, y)
-        else if (align === "right")
-          for (let x = width; x > 0; x-=hh) fn(x, y)
-        else if (align === "center")
-          for (let x = min; x < width; x+=hh) fn(x, y)
-      }
-      const drawLine = (x: number, y: number) => {
-        ctx.moveTo(x * pr, y * h * pr)
-        ctx.lineTo(x * pr, (y + 1) * h * pr)
-      }
-
-      ctx.beginPath()
-      for (let y = 0; y < height / h; y++) proceedX(drawLine, y)
-      ctx.stroke()
-
-      ctx.strokeStyle = "#f40"
-      cloudRects.forEach((multipoly) => {
-        ctx.beginPath()
-        multipoly[0].forEach(([ x, y ], i) => {
-          !i ? ctx.moveTo(x * pr, y * pr) : ctx.lineTo(x * pr, y * pr)
-        })
-        ctx.closePath()
-        ctx.stroke()
-      })
-
-    }
-    //// end debug ////
-
     ctx.setTransform(1, 0, 0, 1, 0, 0)
-
-  }, [ width, height, cloudRects ])
+  }, [ cloudRects ])
 
   return (
     <canvas ref={canvasRef} className="cloud-canvas"></canvas>

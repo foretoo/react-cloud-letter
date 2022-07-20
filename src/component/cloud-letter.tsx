@@ -30,6 +30,14 @@ const CloudLetter = (
 
   // helpers
   const spaceWidthRef = useRef(spaceWidth)
+  const contentRef = useRef(content)
+
+  if (contentRef.current !== content) {
+    everyRef.current.length = 0
+    wordsRef.current.length = 0
+    spacesRef.current.length = 0
+    contentRef.current = content
+  }
 
 
 

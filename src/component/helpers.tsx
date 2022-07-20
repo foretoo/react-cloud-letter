@@ -48,9 +48,9 @@ export const canvasDebug = (
     y: number
   ) => {
     if (align === "left" || align === "center")
-      for (let x = 0; x < width; x+=hh) fn(x, y)
+      for (let x = 0; x <= width; x+=hh) fn(x, y)
     else if (align === "right")
-      for (let x = width; x > 0; x-=hh) fn(x, y)
+      for (let x = width; x >= 0; x-=hh) fn(x, y)
   }
   const drawLine = (x: number, y: number) => {
     ctx.moveTo(x * pr, y * h * pr)

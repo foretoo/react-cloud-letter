@@ -13,23 +13,23 @@ const CloudLetter = (
     children: content,
     width,
     spaceWidth,
+    cloudHeight,
     align = "left",
+    mode = "WORD",
+
     fill = "White",
     stroke = "DodgerBlue",
     strokeWidth = 2,
-    mode = "WORD",
   }: CloudLetterProps
 ) => {
 
   const [ data, setData ] = useState<{ width: number, height: number, cloudRects: CloudRect[] } | null>(null)
-  const [ triggerSetData, toggleTrigger ] = useState(false)
   const letterRef = useRef<HTMLParagraphElement>(null)
   const everyRef = useRef<SpanRef[]>([])
   const wordsRef = useRef<SpanRef[]>([])
   const spacesRef = useRef<SpanRef[]>([])
 
   // helpers
-  const spaceWidthRef = useRef(spaceWidth)
   const contentRef = useRef(content)
 
   if (contentRef.current !== content) {
@@ -39,49 +39,63 @@ const CloudLetter = (
     contentRef.current = content
   }
 
+  const deno = cloudHeight / 2 | 0 // <-- denominator
+  const space_width = Math.ceil(spaceWidth / deno) * deno
+  const spaceWidthRef = useRef(NaN)
+  const alignRef = useRef(align)
 
 
-  // find common denominator
-  // and set widths of all elements with respect to it
+
   useEffect(() => {
-    const { height: h } = everyRef.current[0].getBoundingClientRect()
-    const deno = h / 2 | 0 // align === "center" ? h : h / 2 | 0 // <-- denominator
-
-    spaceWidthRef.current = Math.ceil(spaceWidth / deno) * deno
-
     wordsRef.current.forEach((span) => {
       let { width: w } = span.getBoundingClientRect()
       w = Math.ceil(w / deno) * deno
       span.style.width = `${w}px`
     })
 
-    toggleTrigger(!triggerSetData)
-  }, [ content, width, spaceWidth, align, mode ])
-
-  // and then extract coordinates
-  useEffect(() => {
-    if (triggerSetData) {
-      const { height, top, left } = letterRef.current!.getBoundingClientRect()
-      const clouds = mode === "WORD"
-        ? wordsRef.current.filter((span) => !span.idle)
-        : spacesRef.current
-      const cloudRects = clouds.map((span) => {
-        let { x, y, width: w, height: h } = span.getBoundingClientRect()
-        x -= left
-        y -= top
-        return (
-          [[
-            [ x,     y     ],
-            [ x + w, y     ],
-            [ x + w, y + h ],
-            [ x,     y + h ],
-          ]] as CloudRect
-        )
-      })
-      setData({ width, height, cloudRects })
-      toggleTrigger(!triggerSetData)
+    const { height, top, left } = letterRef.current!.getBoundingClientRect()
+    
+    if (align === "center") {
+      if (spaceWidthRef.current !== space_width || alignRef.current !== align) {
+        everyRef.current.forEach((span) => span.style.left = "")
+        const { top, left } = letterRef.current!.getBoundingClientRect()
+        let yh = NaN, xo = NaN
+        everyRef.current.forEach((span) => {
+          let { x, y } = span.getBoundingClientRect()
+          x -= left
+          y -= top
+          if (y !== yh) {
+            yh = y
+            xo = -((x % deno) / deno) * deno
+          }
+          span.style.left = `${xo}px`
+        })
+      }
     }
-  }, [ triggerSetData ])
+    else everyRef.current.forEach((span) => span.style.left = "")
+    spaceWidthRef.current !== space_width && (spaceWidthRef.current = space_width)
+    alignRef.current !== align && (alignRef.current = align)
+
+
+    const clouds = mode === "WORD"
+      ? wordsRef.current.filter((span) => !span.idle)
+      : spacesRef.current
+    const cloudRects = clouds.map((span) => {
+      let { x, y, width: w, height: h } = span.getBoundingClientRect()
+      x -= left
+      y -= top
+      return (
+        [[
+          [ x,     y     ],
+          [ x + w, y     ],
+          [ x + w, y + h ],
+          [ x,     y + h ],
+        ]] as CloudRect
+      )
+    })
+    setData({ width, height, cloudRects })
+
+  }, [ content, width, spaceWidth, cloudHeight, align, mode ])
 
 
 
@@ -107,7 +121,8 @@ const CloudLetter = (
       className="cloud-letter"
       style={{
           "width": `${width}px`,
-          "--gap": `${spaceWidthRef.current}px`,
+          "--gap": `${space_width}px`,
+          "--height": `${cloudHeight}px`,
           "--align": align
         } as CSSProperties
       }
@@ -121,6 +136,7 @@ const CloudLetter = (
       </cloudContext.Provider>
       {data && <CloudCanvas
         {...data}
+        cloudHeight={cloudHeight}
         align={align}
         fill={fill}
         stroke={stroke}

@@ -1,3 +1,7 @@
+:root
+  --fill: DodgerBlue
+  --brd: 2px solid var(--fill)
+
 *
   margin: 0
   padding: 0
@@ -21,7 +25,7 @@ html, body, #root
   overflow: auto
 
 form.controls
-  border: 2px solid #47f
+  border: var(--brd)
   border-radius: 7px
   background-color: #fff
 
@@ -34,7 +38,7 @@ form.controls
     align-items: center
     gap: 0.4rem
     padding: 0.4rem 0.4rem
-    border-top: 2px solid #47f
+    border-top: var(--brd)
 
     &:first-child
       border-top: none
@@ -58,7 +62,7 @@ form.controls
         // resize: none
 
     > span
-      color: #47f
+      color: var(--fill)
 
     > label
       display: flex

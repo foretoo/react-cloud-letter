@@ -12,7 +12,7 @@ export const App = () => {
   const [ align, setAlign ] = useState<"left" | "center" | "right">("center")
   const [ spaceWidth, setSpaceWidth ] = useState(40)
   const [ cloudHeight, setCloudHeight ] = useState(30)
-  const [ snap, setSnap ] = useState(false)
+  const [ snap, setSnap ] = useState(0)
   const [ grid, setGrid ] = useState(true)
 
   const handleInput = (e: FormEvent<HTMLTextAreaElement>) => {
@@ -34,6 +34,10 @@ export const App = () => {
   const handleCloudHeightChange = (e: FormEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement
     setCloudHeight(+target.value)
+  }
+  const handleSnapChange = (e: FormEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement
+    setSnap(+target.value)
   }
 
   return (
@@ -111,9 +115,11 @@ export const App = () => {
           <label className="snap">
             <span>snap</span>
             <input
-              type="checkbox"
-              checked={snap}
-              onChange={() => setSnap(prev => !prev)}
+              type="number"
+              value={snap}
+              min={0}
+              max={4}
+              onChange={handleSnapChange}
             />
           </label>
           <label className="grid">

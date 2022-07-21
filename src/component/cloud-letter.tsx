@@ -16,7 +16,7 @@ const CloudLetter = (
     cloudHeight,
     align = "left",
     mode = "WORD",
-    snap = false,
+    snap = 0,
     grid = false,
 
     fill = "White",
@@ -33,7 +33,7 @@ const CloudLetter = (
 
   // helpers
   const contentRef = useRef(content)
-  const deno = cloudHeight / 2 // <-- denominator
+  const deno = snap ? cloudHeight / snap : 1 // <-- denominator
 
   if (contentRef.current !== content) {
     everyRef.current.length = 0
@@ -133,7 +133,8 @@ const CloudLetter = (
       </cloudContext.Provider>
       {data && <CloudCanvas
         {...data}
-        grid={snap && grid}
+        snap={snap}
+        grid={snap > 0 && grid}
         cloudHeight={cloudHeight}
         align={align}
         fill={fill}

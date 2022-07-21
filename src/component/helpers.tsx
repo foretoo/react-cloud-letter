@@ -27,6 +27,7 @@ export const canvasDebug = (
   width: number,
   height: number,
   align: Align,
+  snap: number,
   cloudRects: CloudRect[],
 ) => {
   const pr = window.devicePixelRatio
@@ -41,7 +42,7 @@ export const canvasDebug = (
   ctx.lineWidth = 1
 
   const h = cloudRects[0][0][2][1] - cloudRects[0][0][0][1]
-  const hh = h / 2
+  const hh = h / snap
 
   const proceedX = (
     fn: (x: number, y: number) => void,

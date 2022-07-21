@@ -28,7 +28,7 @@ type CloudLetterProps = {
   spaceWidth: number
   cloudHeight: number
   align?: Align
-  snap?: boolean
+  snap?: number
   grid?: boolean
   // wordStyle?: CSSWordProperties
   fill?: string
@@ -49,6 +49,7 @@ type CloudCanvasProps = {
   fill: string
   stroke: string
   strokeWidth: number
+  snap: number
   grid: boolean
 }
 

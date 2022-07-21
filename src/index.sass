@@ -5,7 +5,8 @@
 *
   margin: 0
   padding: 0
-  border: 0
+  border: none
+  outline: none
   font-family: sans-serif
   font-size: 20px
   line-height: 1rem
@@ -72,3 +73,15 @@ form.controls
         margin-left: 0.5rem
         padding-left: 0.5rem
         border-left: var(--brd)
+
+        > input[type=number]
+          width: 30px
+          border-bottom: var(--brd)
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button
+  -webkit-appearance: none
+  margin: 0
+
+input[type=number]
+  -moz-appearance: textfield

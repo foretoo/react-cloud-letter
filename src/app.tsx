@@ -56,6 +56,17 @@ export const App = () => {
       </CloudLetter>
 
       <form className="controls">
+        <fieldset className="controls-row content">
+          <span>content:</span>
+          <textarea
+            rows={3}
+            cols={Math.min(Math.max(30, width/25|0), 55)}
+            value={content}
+            autoFocus={true}
+            onInput={handleInput}
+          />
+        </fieldset>
+
         <fieldset className="controls-row mode">
           <span>mode:</span>
           <label>
@@ -114,40 +125,6 @@ export const App = () => {
           </label>
         </fieldset>
 
-        <fieldset className="controls-row snap">
-          <span>snap: </span>
-          <label className="snap">
-            divide by
-            <input
-              type="number"
-              value={snap}
-              min={0}
-              max={4}
-              onChange={handleSnapChange}
-            />
-          </label>
-          <label className="grid">
-            <span style={{ color: snap ? "black" : "grey" }}>grid</span>
-            <input
-              type="checkbox"
-              disabled={!snap}
-              checked={grid}
-              onChange={() => setGrid(prev => !prev)}
-            />
-          </label>
-        </fieldset>
-
-        <fieldset className="controls-row content">
-          <span>content:</span>
-          <textarea
-            rows={3}
-            cols={Math.min(Math.max(30, width/25|0), 55)}
-            value={content}
-            autoFocus={true}
-            onInput={handleInput}
-          />
-        </fieldset>
-
         <fieldset className="controls-row space-width">
           <span>space width</span>
           <input
@@ -159,6 +136,7 @@ export const App = () => {
             onInput={handleSpaceWidthChange}
           />
         </fieldset>
+
         <fieldset className="controls-row cloud-height">
           <span>clouds height</span>
           <input
@@ -169,6 +147,29 @@ export const App = () => {
             value={cloudHeight}
             onInput={handleCloudHeightChange}
           />
+        </fieldset>
+
+        <fieldset className="controls-row snap">
+          <span>snap: </span>
+          <label className="snap">
+            h / 
+            <input
+              type="number"
+              value={snap}
+              min={0}
+              max={4}
+              onChange={handleSnapChange}
+            />
+          </label>
+          <label className="grid">
+            <span style={{ color: snap ? "black" : "grey" }}>, grid</span>
+            <input
+              type="checkbox"
+              disabled={!snap}
+              checked={grid}
+              onChange={() => setGrid(prev => !prev)}
+            />
+          </label>
         </fieldset>
       </form>
     </>

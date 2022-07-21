@@ -31,6 +31,10 @@ const CloudLetter = (
 
   // helpers
   const contentRef = useRef(content)
+  const deno = cloudHeight / 2 | 0 // <-- denominator
+  const space_width = Math.ceil(spaceWidth / deno) * deno
+  const spaceWidthRef = useRef(NaN)
+  const alignRef = useRef(align)
 
   if (contentRef.current !== content) {
     everyRef.current.length = 0
@@ -39,21 +43,17 @@ const CloudLetter = (
     contentRef.current = content
   }
 
-  const deno = cloudHeight / 2 | 0 // <-- denominator
-  const space_width = Math.ceil(spaceWidth / deno) * deno
-  const spaceWidthRef = useRef(NaN)
-  const alignRef = useRef(align)
-
 
 
   useEffect(() => {
+    const { height, top, left } = letterRef.current!.getBoundingClientRect()
+
     wordsRef.current.forEach((span) => {
+      span.style.width = ""
       let { width: w } = span.getBoundingClientRect()
       w = Math.ceil(w / deno) * deno
       span.style.width = `${w}px`
     })
-
-    const { height, top, left } = letterRef.current!.getBoundingClientRect()
     
     if (align === "center") {
       if (spaceWidthRef.current !== space_width || alignRef.current !== align) {

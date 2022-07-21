@@ -48,15 +48,14 @@ form.controls
         flex-grow: 1
 
     &.content
-      position: relative
+      flex-direction: column
       align-items: flex-start
 
       > span
-        position: absolute
+        background-color: white
 
       > textarea
         padding: 0
-        text-indent: 65px
         outline: none
         background-color: transparent
         // resize: none
@@ -68,3 +67,8 @@ form.controls
       display: flex
       align-items: center
       gap: 0.4rem
+
+      &.snap
+        margin-left: 0.5rem
+        padding-left: 0.5rem
+        border-left: var(--brd)

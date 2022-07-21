@@ -9,8 +9,11 @@ export const App = () => {
 
   const [ content, setContent ] = useState(mineText)
   const [ mode, setMode ] = useState<"WORD" | "SPACE">("WORD")
-  const [ align, setAlign ] = useState<"left" | "center" | "right">("right")
-  const [ spaceWidth, setSpaceWidth ] = useState(78)
+  const [ align, setAlign ] = useState<"left" | "center" | "right">("center")
+  const [ spaceWidth, setSpaceWidth ] = useState(40)
+  const [ cloudHeight, setCloudHeight ] = useState(30)
+  const [ snap, setSnap ] = useState(false)
+  const [ grid, setGrid ] = useState(true)
 
   const handleInput = (e: FormEvent<HTMLTextAreaElement>) => {
     const target = e.target as HTMLTextAreaElement
@@ -24,9 +27,13 @@ export const App = () => {
     const target = e.target as HTMLInputElement
     setAlign(target.value as "left" | "center" | "right")
   }
-  const handleRangeChange = (e: FormEvent<HTMLInputElement>) => {
+  const handleSpaceWidthChange = (e: FormEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement
     setSpaceWidth(+target.value)
+  }
+  const handleCloudHeightChange = (e: FormEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement
+    setCloudHeight(+target.value)
   }
 
   return (
@@ -34,8 +41,11 @@ export const App = () => {
       <CloudLetter
         width={Math.min(width*0.8, 512)}
         spaceWidth={spaceWidth}
+        cloudHeight={cloudHeight}
         align={align}
         mode={mode}
+        snap={snap}
+        grid={grid}
       >
         {content}
         {/* Initial  <CloudWord>Text</CloudWord> <CloudWord>For</CloudWord> <CloudWord>Cloudy</CloudWord> Lettering */}
@@ -98,13 +108,30 @@ export const App = () => {
             />
             right
           </label>
+          <label className="snap">
+            <span>snap</span>
+            <input
+              type="checkbox"
+              checked={snap}
+              onChange={() => setSnap(prev => !prev)}
+            />
+          </label>
+          <label className="grid">
+            <span style={{ color: snap ? "black" : "grey" }}>grid</span>
+            <input
+              type="checkbox"
+              disabled={!snap}
+              checked={grid}
+              onChange={() => setGrid(prev => !prev)}
+            />
+          </label>
         </fieldset>
 
         <fieldset className="controls-row content">
           <span>content:</span>
           <textarea
             rows={3}
-            cols={Math.min(width/25|0, 55)}
+            cols={Math.min(Math.max(30, width/25|0), 55)}
             value={content}
             autoFocus={true}
             onInput={handleInput}
@@ -117,8 +144,20 @@ export const App = () => {
             type="range"
             min={0}
             max={100}
+            step={1}
             value={spaceWidth}
-            onInput={handleRangeChange}
+            onInput={handleSpaceWidthChange}
+          />
+        </fieldset>
+        <fieldset className="controls-row cloud-height">
+          <span>clouds height</span>
+          <input
+            type="range"
+            min={20}
+            max={50}
+            step={1}
+            value={cloudHeight}
+            onInput={handleCloudHeightChange}
           />
         </fieldset>
       </form>

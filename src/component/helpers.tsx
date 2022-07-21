@@ -1,24 +1,31 @@
 import { CloudSpace } from "./cloud-space"
 import { CloudWord } from "./cloud-word"
-import { Align, CloudRect } from "./types"
+import { Align, CloudRect, Mode } from "./types"
 
 
 
 export const getCloudMapper = (
-  modeIsWord: boolean
+  mode: Mode
 ) => (
   element: string, i: number | string,
 ) => {
-  return element.match(/\n/g)
-    ? <br key={`${i}-break`} />
-    : element === " "
-      ? <CloudSpace key={`${i}-space`}/>
-      : <CloudWord key={`${i}-${element}`} idle={!modeIsWord} >{element}</CloudWord>
+  if (element.match(/\n/g)) return <br key={`${i}-break`} />
+  if (element === " ") return <CloudSpace key={`${i}-space`}/>
+  if (mode === "WORD") return <CloudWord key={`${i}-${element}`} idle={false} >{element}</CloudWord>
+  if (mode === "SPACE") return <CloudWord key={`${i}-${element}`} idle={true} >{element}</CloudWord>
+
+  // ^\$[^\$]+\$$ | replace \$
+  return element.match(/^\$\{[^\$\{]+\}$/g)
+    ? <CloudWord key={`${i}-${element}`} idle={false} >{element.replace(/(^\$\{)|(\}$)/g, "")}</CloudWord>
+    : <CloudWord key={`${i}-${element}`} idle={true} >{element}</CloudWord>
 }
 
 
 
-export const split = (str: string) => str.split(/(\s)/).filter(Boolean)
+export const split = (
+  str: string,
+  mode: Mode
+) => str.split(mode === "PARTIAL" ? /(\$\{[^\$\{]+\}|\s)/ : /(\s)/).filter(Boolean)
 
 
 

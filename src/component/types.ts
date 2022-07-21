@@ -40,19 +40,6 @@ type CloudLetterProps = {
 type Point = [ number, number ]
 type CloudRect = [[ Point, Point, Point, Point ]]
 
-type CloudCanvasProps = {
-  width: number
-  height: number
-  cloudHeight: number
-  align: Align
-  cloudRects: CloudRect[]
-  fill: string
-  stroke: string
-  strokeWidth: number
-  snap: number
-  grid: boolean
-}
-
 type CloudContext = {
   every: SpanRef[]
   words: SpanRef[]
@@ -66,6 +53,5 @@ export {
   type CloudWordProps,
   type CloudLetterProps,
   type CloudRect,
-  type CloudCanvasProps,
   type CloudContext,
 }

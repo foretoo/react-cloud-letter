@@ -112,8 +112,12 @@ export const App = () => {
             />
             right
           </label>
+        </fieldset>
+
+        <fieldset className="controls-row snap">
+          <span>snap: </span>
           <label className="snap">
-            <span>snap</span>
+            divide by
             <input
               type="number"
               value={snap}

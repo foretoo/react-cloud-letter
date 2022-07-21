@@ -61,9 +61,8 @@ export const App = () => {
           <span>content:</span>
           <textarea
             rows={3}
-            cols={Math.min(Math.max(30, width/25|0), 55)}
+            cols={Math.min(Math.max(42, width/25|0), 55)}
             value={content}
-            autoFocus={true}
             onInput={handleInput}
           />
         </fieldset>
@@ -183,6 +182,12 @@ export const App = () => {
           </label>
         </fieldset>
       </form>
+      <a
+        className="repo-link"
+        href="https://github.com/foretoo/cloud-letter"
+      >
+        github repo
+      </a>
     </>
   )
 }

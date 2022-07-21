@@ -1,7 +1,9 @@
 # cloud-letter
-cloud-letter@0.0.1
+
+React-based component wraps your letter in auto-merged cloud-like shape. Created with respect to [polygon-clipping](https://github.com/mfogel/polygon-clipping) implementation of the Martinez-Rueda-Feito polygon clipping algorithm.
 
 ## [Demo page](https://foretoo.github.io/cloud-letter)
+v0.0.1
 </br>
 
 ```typescript

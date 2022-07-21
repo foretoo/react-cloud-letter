@@ -5,7 +5,7 @@ import roundPolygon, { InitPoint, RoundedPoint } from "round-polygon"
 import { canvasDebug } from "./helpers"
 
 export const CloudCanvas = (
-  { width, height, cloudHeight, align, cloudRects, fill, stroke, strokeWidth }: CloudCanvasProps
+  { width, height, cloudHeight, align, cloudRects, fill, stroke, strokeWidth, grid }: CloudCanvasProps
 ) => {
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -84,10 +84,10 @@ export const CloudCanvas = (
       ctx.stroke()
     })
 
-    // canvasDebug(ctx, width, height, align, cloudRects)
+    grid && canvasDebug(ctx, width, height, align, cloudRects)
 
     ctx.setTransform(1, 0, 0, 1, 0, 0)
-  }, [ cloudRects ])
+  })
 
   return (
     <canvas ref={canvasRef} className="cloud-canvas"></canvas>

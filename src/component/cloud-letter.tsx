@@ -59,7 +59,7 @@ const CloudLetter = (
   useLayoutEffect(() => {
 
     //// HANDLE WIDTHS, POSITIONS on SNAP
-    
+
     wordsRef.current.forEach((span) => span.style.width = "")
     everyRef.current.forEach((span) => span.style.left = "")
     if (snap) {
@@ -89,7 +89,7 @@ const CloudLetter = (
     //// DATA ////
 
     const { height, top, left } = letterRef.current!.getBoundingClientRect()
-    const clouds = mode === "WORD"
+    const clouds = (mode === "WORD" || mode === "PARTIAL")
       ? wordsRef.current.filter((span) => !span.idle)
       : spacesRef.current
     const cloudRects = clouds.map((span) => {
@@ -106,7 +106,7 @@ const CloudLetter = (
       )
     })
 
-    const multiRoundedPolies = polygonBoolean.union(...cloudRects)
+    const multiRoundedPolies = cloudRects.length ? polygonBoolean.union(...cloudRects)
       .map((merged) => (
         merged.map((poly) => {
           poly.pop()
@@ -117,7 +117,7 @@ const CloudLetter = (
         polies.map((poly) => (
           roundPolygon(poly, cloudHeight / (snap === 1 ? 2 : 4))
         ))
-      ))
+      )) : []
 
 
     //// CANVAS ////
@@ -172,16 +172,14 @@ const CloudLetter = (
   })
 
 
-
+  const cloudMapper = getCloudMapper(mode)
   if (typeof content === "string") {
-    const cloudMapper = getCloudMapper(mode === "WORD")
-    content = split(content).map(cloudMapper)
+    content = split(content, mode).map(cloudMapper)
   }
   else if (Array.isArray(content)) {
-    const idleMapper = getCloudMapper(false)
     content = content.reduce((acc: JSX.Element[], element, i) => {
       typeof element === "string"
-        ? split(element).forEach((idles, j) => acc.push(idleMapper(idles, `${i}-${j}`)))
+        ? split(element, mode).forEach((idles, j) => acc.push(cloudMapper(idles, `${i}-${j}`)))
         : acc.push(element)
       return acc
     }, [])

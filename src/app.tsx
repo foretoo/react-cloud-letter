@@ -3,15 +3,16 @@ import { CloudLetter, CloudWord } from "./component/cloud-letter"
 import { text1, text2 } from "./component/text"
 
 const width = window.innerWidth
-const mineText = "The origin of the term \"cloud\" can be found in the Old English words clud or clod, meaning a hill or a mass of stone."
+const mineText = "The ${origin} of the term \"cloud\" can be ${found} in ${the Old English} words clud or clod, meaning a hill or a mass of stone."
+// "The $origin$ of the term \"cloud\" can be $found$ in $the Old English$ words clud or clod, meaning a hill or a mass of stone."
 
 export const App = () => {
 
   const [ content, setContent ] = useState(mineText)
-  const [ mode, setMode ] = useState<"WORD" | "SPACE">("WORD")
+  const [ mode, setMode ] = useState<"WORD" | "SPACE" | "PARTIAL">("PARTIAL")
   const [ align, setAlign ] = useState<"left" | "center" | "right">("center")
-  const [ spaceWidth, setSpaceWidth ] = useState(40)
-  const [ cloudHeight, setCloudHeight ] = useState(30)
+  const [ spaceWidth, setSpaceWidth ] = useState(4)
+  const [ cloudHeight, setCloudHeight ] = useState(32)
   const [ snap, setSnap ] = useState(0)
   const [ grid, setGrid ] = useState(true)
 
@@ -78,6 +79,16 @@ export const App = () => {
               onChange={handleModeChange}
             />
             WORD
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="mode"
+              value="PARTIAL"
+              checked={mode === "PARTIAL"}
+              onChange={handleModeChange}
+            />
+            PARTIAL
           </label>
           <label>
             <input
@@ -152,7 +163,7 @@ export const App = () => {
         <fieldset className="controls-row snap">
           <span>snap: </span>
           <label className="snap">
-            h / 
+            cloudHeight  / 
             <input
               type="number"
               value={snap}

@@ -1,28 +1,23 @@
 # cloud-letter
-cloud-letter
+cloud-letter@0.0.1
+
+## [Demo page](https://foretoo.github.io/cloud-letter)
+</br>
 
 ```typescript
 CloudLetterProps = {
-  children: string | JSX.Element
-  width: string
-  spaceWidth: string
-  wordStyle?: {
-    font: string
-    fontFamily: string
-    fontSize: string
-    fontStyle: string
-    fontVariant: string
-    fontWeight: string
-    fontStretch: string
-    // lineHeight, padding props below
-    // should be integers in px units
-    // to get predictable behaviour
-    lineHeight: string
-    padding: string
+  children: string | JSX.Element | (string | JSX.Element)[] | null
+  width: number
+  spaceWidth: number
+  cloudHeight: number
 
-    fill: string
-    stroke: string
-    strokeWidth: number
-  }
+  mode?: "WORD" | "PARTIAL" | "SPACE"
+  align?: "left" | "center" | "right"
+  snap?: number
+  grid?: boolean
+
+  fill?: string
+  stroke?: string
+  strokeWidth?: number
 }
 ```

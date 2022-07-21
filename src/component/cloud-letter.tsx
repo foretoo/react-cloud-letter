@@ -16,6 +16,8 @@ const CloudLetter = (
     cloudHeight,
     align = "left",
     mode = "WORD",
+    snap = false,
+    grid = false,
 
     fill = "White",
     stroke = "DodgerBlue",
@@ -31,10 +33,7 @@ const CloudLetter = (
 
   // helpers
   const contentRef = useRef(content)
-  const deno = cloudHeight / 2 | 0 // <-- denominator
-  const space_width = Math.ceil(spaceWidth / deno) * deno
-  const spaceWidthRef = useRef(NaN)
-  const alignRef = useRef(align)
+  const deno = cloudHeight / 2 // <-- denominator
 
   if (contentRef.current !== content) {
     everyRef.current.length = 0
@@ -46,18 +45,17 @@ const CloudLetter = (
 
 
   useEffect(() => {
-    const { height, top, left } = letterRef.current!.getBoundingClientRect()
 
-    wordsRef.current.forEach((span) => {
-      span.style.width = ""
-      let { width: w } = span.getBoundingClientRect()
-      w = Math.ceil(w / deno) * deno
-      span.style.width = `${w}px`
-    })
-    
-    if (align === "center") {
-      if (spaceWidthRef.current !== space_width || alignRef.current !== align) {
-        everyRef.current.forEach((span) => span.style.left = "")
+    wordsRef.current.forEach((span) => span.style.width = "")
+    everyRef.current.forEach((span) => span.style.left = "")
+    if (snap) {
+      wordsRef.current.forEach((span) => {
+        let { width: w } = span.getBoundingClientRect()
+        w = Math.ceil(w / deno) * deno
+        span.style.width = `${w}px`
+      })
+      
+      if (align === "center") {
         const { top, left } = letterRef.current!.getBoundingClientRect()
         let yh = NaN, xo = NaN
         everyRef.current.forEach((span) => {
@@ -72,14 +70,13 @@ const CloudLetter = (
         })
       }
     }
-    else everyRef.current.forEach((span) => span.style.left = "")
-    spaceWidthRef.current !== space_width && (spaceWidthRef.current = space_width)
-    alignRef.current !== align && (alignRef.current = align)
 
 
+
+    const { height, top, left } = letterRef.current!.getBoundingClientRect()
     const clouds = mode === "WORD"
-      ? wordsRef.current.filter((span) => !span.idle)
-      : spacesRef.current
+    ? wordsRef.current.filter((span) => !span.idle)
+    : spacesRef.current
     const cloudRects = clouds.map((span) => {
       let { x, y, width: w, height: h } = span.getBoundingClientRect()
       x -= left
@@ -95,7 +92,7 @@ const CloudLetter = (
     })
     setData({ width, height, cloudRects })
 
-  }, [ content, width, spaceWidth, cloudHeight, align, mode ])
+  }, [ content, width, spaceWidth, cloudHeight, align, mode, snap, grid ])
 
 
 
@@ -121,7 +118,7 @@ const CloudLetter = (
       className="cloud-letter"
       style={{
           "width": `${width}px`,
-          "--gap": `${space_width}px`,
+          "--gap": `${snap ? Math.ceil(spaceWidth / deno) * deno : spaceWidth}px`,
           "--height": `${cloudHeight}px`,
           "--align": align
         } as CSSProperties
@@ -136,6 +133,7 @@ const CloudLetter = (
       </cloudContext.Provider>
       {data && <CloudCanvas
         {...data}
+        grid={snap && grid}
         cloudHeight={cloudHeight}
         align={align}
         fill={fill}

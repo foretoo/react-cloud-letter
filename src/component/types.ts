@@ -19,7 +19,7 @@ type SpanRef = HTMLSpanElement & { idle: boolean }
 
 
 
-type Mode = "WORD" | "SPACE"
+type Mode = "WORD" | "SPACE" | "PARTIAL"
 type Align = "left" | "center" | "right"
 
 type CloudLetterProps = {

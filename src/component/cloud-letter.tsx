@@ -48,8 +48,8 @@ const CloudLetter = (
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const ctxRef = useRef<CanvasRenderingContext2D | null>(null)
   const l = strokeWidth
-  const sy = 4
-  const sx = -2
+  const sy = 5
+  const sx = -3
   const sc = stroke
 
   useLayoutEffect(() => {

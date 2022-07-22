@@ -20,8 +20,8 @@ export const App = () => {
   const [ snap, setSnap ] = useState(1)
   const [ grid, setGrid ] = useState(false)
   const [ fill, setFill ] = useState("#ffffff")
-  const [ stroke, setStroke ] = useState("#1A66A1")
-  const [ shadowOffset, setShadowOffset ] = useState({ x: -20, y: 20 })
+  const [ stroke, setStroke ] = useState("#1e90ff")
+  const [ shadowOffset, setShadowOffset ] = useState({ x: -3, y: 5 })
 
     
 

@@ -1,4 +1,4 @@
-import { CSSProperties, useRef, useLayoutEffect, useEffect } from "react"
+import { CSSProperties, useRef, useLayoutEffect } from "react"
 import { CloudLetterProps, CloudRect, SpanRef } from "./types"
 import { split, getCloudMapper } from "./helpers"
 import { cloudContext } from "./context"
@@ -16,6 +16,7 @@ const CloudLetter = (
     width,
     spaceWidth,
     cloudHeight,
+    font,
     padding = 10,
 
     align = "left",
@@ -28,7 +29,7 @@ const CloudLetter = (
     strokeWidth = 2,
     shadowOffsetX = -3,
     shadowOffsetY = 5,
-    shadowColor = stroke
+    shadowColor = stroke,
   }: CloudLetterProps
 ) => {
 
@@ -202,7 +203,12 @@ const CloudLetter = (
           "--gap": `${snap ? Math.ceil(spaceWidth / deno) * deno : spaceWidth}px`,
           "--height": `${cloudHeight}px`,
           "--padding": `0 ${padding}px`,
+          "--padding-idle": `0 ${mode === "PARTIAL" ? font.size / 4 : padding}px`,
+          "--margin-partial": `0 ${mode === "PARTIAL" ? font.size / 4 : 0}px`,
           "--align": align,
+          "--font-size": `${font.size}px`,
+          "--font-family": font.family,
+          "--color": font.color,
         } as CSSProperties
       }
     >

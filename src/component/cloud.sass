@@ -14,21 +14,27 @@ p.cloud-letter
       position: relative
       display: inline-block
       margin: 0
-      padding: var(--padding)
+      padding: 0
       border: 0
       box-sizing: border-box
       white-space: pre
 
-      color: DodgerBlue
-      font-family: 'Courier New', Courier, monospace
-      font-weight: bold
-      font-size: 16px
+      color: var(--color)
+      font-size: var(--font-size)
+      font-family: var(--font-family)
       line-height: var(--height)
       text-align: var(--align)
 
-    &.cloud-element.space
+    &.space
       padding: 0
       width: var(--gap)
+
+    &.fill
+      padding: var(--padding)
+      margin: var(--margin-partial)
+
+    &.idle
+      padding: var(--padding-idle)
 
   > canvas.cloud-canvas
     position: absolute

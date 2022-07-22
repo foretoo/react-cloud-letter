@@ -12,6 +12,14 @@ export const CloudWord = ({
       className="cloud-element word"
       ref={(span: SpanRef) => {
         if (span) {
+          if (idle) {
+            span.classList.remove("fill")
+            span.classList.add("idle")
+          }
+          else {
+            span.classList.remove("idle")
+            span.classList.add("fill")
+          }
           span.idle = idle
           !every.includes(span) && every.push(span!)
           !words.includes(span) && words.push(span!)

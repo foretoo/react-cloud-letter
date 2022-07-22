@@ -27,6 +27,7 @@ type CloudLetterProps = {
   width: number
   spaceWidth: number
   cloudHeight: number
+  mode?: Mode
   align?: Align
   snap?: number
   grid?: boolean
@@ -34,7 +35,9 @@ type CloudLetterProps = {
   fill?: string
   stroke?: string
   strokeWidth?: number
-  mode?: Mode
+  shadowOffsetX?: number
+  shadowOffsetY?: number
+  shadowColor?: string
 }
 
 type Point = [ number, number ]

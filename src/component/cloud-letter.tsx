@@ -24,6 +24,9 @@ const CloudLetter = (
     fill = "White",
     stroke = "DodgerBlue",
     strokeWidth = 2,
+    shadowOffsetX = -3,
+    shadowOffsetY = 5,
+    shadowColor = stroke
   }: CloudLetterProps
 ) => {
 
@@ -47,10 +50,6 @@ const CloudLetter = (
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const ctxRef = useRef<CanvasRenderingContext2D | null>(null)
-  const l = strokeWidth
-  const sy = 5
-  const sx = -3
-  const sc = stroke
 
   useLayoutEffect(() => {
     ctxRef.current = canvasRef.current!.getContext("2d")
@@ -125,6 +124,11 @@ const CloudLetter = (
     const pr = window.devicePixelRatio
     const ctx = ctxRef.current!
     const canvas = canvasRef.current!
+
+    const l = strokeWidth
+    const sx = shadowOffsetX
+    const sy = shadowOffsetY
+    const sc = shadowColor
 
     const _width = width + (Math.abs(sx) > l/2 ? Math.abs(sx) + l/2 : l)
     const _height = height + (Math.abs(sy) > l/2 ? Math.abs(sy) + l/2 : l)

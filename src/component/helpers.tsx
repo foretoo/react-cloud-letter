@@ -1,3 +1,4 @@
+import { RoundedPoint } from "round-polygon"
 import { CloudSpace } from "./cloud-space"
 import { CloudWord } from "./cloud-word"
 import { Align, CloudRect, Mode } from "./types"
@@ -26,6 +27,27 @@ export const split = (
   str: string,
   mode: Mode
 ) => str.split(mode === "PARTIAL" ? /(\$\{[^\$\{]+\}|\s)/ : /(\s)/).filter(Boolean)
+
+
+
+export const fillPolies = (
+  ctx: CanvasRenderingContext2D,
+  multiPoly: RoundedPoint[][][],
+  pr: number,
+) => {
+  multiPoly.forEach((roundedPolies) => {
+    ctx.beginPath()
+    roundedPolies.forEach((roundedPoly) => {
+      roundedPoly.forEach((p, i) => {
+        !i && ctx.moveTo(p.in.x * pr, p.in.y * pr)
+        ctx.arcTo(p.x * pr, p.y * pr, p.out.x * pr, p.out.y * pr, p.arc.radius * pr)
+        ctx.lineTo(p.next.in.x * pr, p.next.in.y * pr)
+      })
+    })
+    ctx.fill()
+    ctx.stroke()
+  })
+}
 
 
 

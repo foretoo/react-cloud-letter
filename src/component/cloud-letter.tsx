@@ -1,6 +1,6 @@
 import { CSSProperties, useRef, useLayoutEffect } from "react"
 import { CloudLetterProps, CloudRect, SpanRef } from "./types"
-import { split, getCloudMapper } from "./helpers"
+import { split, getCloudMapper, fillPolies } from "./helpers"
 import { cloudContext } from "./context"
 import { CloudWord } from "./cloud-word"
 import polygonBoolean from "polygon-clipping"
@@ -56,6 +56,7 @@ const CloudLetter = (
 
   useLayoutEffect(() => {
     ctxRef.current = canvasRef.current!.getContext("2d")
+    ctxRef.current!.lineJoin = "round"
   }, [])
 
   useLayoutEffect(() => {
@@ -143,11 +144,7 @@ const CloudLetter = (
 
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-    if (l > 0) {
-      ctx.lineJoin = "round"
-      ctx.strokeStyle = stroke
-      ctx.lineWidth = l * pr
-    }
+    if (l > 0) ctx.lineWidth = l * pr
     else ctx.strokeStyle = "transparent"
 
     const offsetY = sy < 0 ? (-sy > l/2 ? -sy : l/2) : l/2
@@ -155,34 +152,14 @@ const CloudLetter = (
 
     // draw shadow
     ctx.fillStyle = shadowColor
+    l > 0 && (ctx.strokeStyle = shadowColor)
     ctx.translate((offsetX + sx) * pr, (offsetY + sy) * pr)
-    multiRoundedPolies.forEach((roundedPolies) => {
-      ctx.beginPath()
-      roundedPolies.forEach((roundedPoly) => {
-        roundedPoly.forEach((p, i) => {
-          !i && ctx.moveTo(p.in.x * pr, p.in.y * pr)
-          ctx.arcTo(p.x * pr, p.y * pr, p.out.x * pr, p.out.y * pr, p.arc.radius * pr)
-          ctx.lineTo(p.next.in.x * pr, p.next.in.y * pr)
-        })
-      })
-      ctx.fill()
-      ctx.stroke()
-    })
+    fillPolies(ctx, multiRoundedPolies, pr)
     // draw clouds
     ctx.fillStyle = fill
+    l > 0 && (ctx.strokeStyle = stroke)
     ctx.translate(-sx * pr, -sy * pr)
-    multiRoundedPolies.forEach((roundedPolies) => {
-      ctx.beginPath()
-      roundedPolies.forEach((roundedPoly) => {
-        roundedPoly.forEach((p, i) => {
-          !i && ctx.moveTo(p.in.x * pr, p.in.y * pr)
-          ctx.arcTo(p.x * pr, p.y * pr, p.out.x * pr, p.out.y * pr, p.arc.radius * pr)
-          ctx.lineTo(p.next.in.x * pr, p.next.in.y * pr)
-        })
-      })
-      ctx.fill()
-      ctx.stroke()
-    })
+    fillPolies(ctx, multiRoundedPolies, pr)
 
     snap && grid && canvasDebug(ctx, width, height, align, snap, cloudRects)
 

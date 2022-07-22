@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap')
+
 :root
   --fill: DodgerBlue
   --brd: 2px solid var(--fill)
@@ -52,9 +54,34 @@ form.controls
     &:first-child
       border-top: none
 
-    &.space-width, &.cloud-height
-      > input[type=range]
+    &.clouds
+      align-items: flex-start
+      div
         flex-grow: 1
+        display: grid
+        gap: 0.25rem
+      input[type=range]
+        flex-grow: 1
+
+    &.view
+
+      div.hidder
+        position: relative
+        width: 1rem
+        height: 1rem
+        border-radius: 0.5rem
+        box-shadow: 0 3px 5px #0007
+        overflow: hidden
+
+        input[type=color]
+          position: absolute
+          width: 2rem
+          height: 2rem
+          left: 50%
+          top: 50%
+          transform: translate(-50%, -50%)
+          background-color: trasparent
+          cursor: pointer
 
     &.content
       flex-direction: column
@@ -72,17 +99,20 @@ form.controls
     > span
       color: var(--fill)
 
-    > label
+    label
       display: flex
       align-items: center
       gap: 0.4rem
       white-space: pre
 
-      &.snap
-        > input[type=number]
-          width: 30px
-          text-align: center
-          border-bottom: var(--brd)
+    > span.shadow-label
+      margin-left: auto
+
+  input[type=number]
+    width: 30px
+    text-align: center
+    border-bottom: var(--brd)
+
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button

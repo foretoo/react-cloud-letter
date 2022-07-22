@@ -131,7 +131,6 @@ const CloudLetter = (
     const l = strokeWidth
     const sx = shadowOffsetX
     const sy = shadowOffsetY
-    const sc = shadowColor
 
     const _width = width + (Math.abs(sx) > l/2 ? Math.abs(sx) + l/2 : l)
     const _height = height + (Math.abs(sy) > l/2 ? Math.abs(sy) + l/2 : l)
@@ -143,7 +142,7 @@ const CloudLetter = (
     canvas.style.left = `${sx < 0 ? (-sx > l/2 ? sx : -l/2) : -l/2}px`
 
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    ctx.fillStyle = fill
+
     if (l > 0) {
       ctx.lineJoin = "round"
       ctx.strokeStyle = stroke
@@ -153,7 +152,10 @@ const CloudLetter = (
 
     const offsetY = sy < 0 ? (-sy > l/2 ? -sy : l/2) : l/2
     const offsetX = sx < 0 ? (-sx > l/2 ? -sx : l/2) : l/2
-    ctx.translate(offsetX * pr, offsetY * pr)
+
+    // draw shadow
+    ctx.fillStyle = shadowColor
+    ctx.translate((offsetX + sx) * pr, (offsetY + sy) * pr)
     multiRoundedPolies.forEach((roundedPolies) => {
       ctx.beginPath()
       roundedPolies.forEach((roundedPoly) => {
@@ -163,12 +165,22 @@ const CloudLetter = (
           ctx.lineTo(p.next.in.x * pr, p.next.in.y * pr)
         })
       })
-      ctx.shadowOffsetX = sx * pr
-      ctx.shadowOffsetY = sy * pr
-      ctx.shadowColor = sc
       ctx.fill()
-      ctx.shadowOffsetX = 0
-      ctx.shadowOffsetY = 0
+      ctx.stroke()
+    })
+    // draw clouds
+    ctx.fillStyle = fill
+    ctx.translate(-sx * pr, -sy * pr)
+    multiRoundedPolies.forEach((roundedPolies) => {
+      ctx.beginPath()
+      roundedPolies.forEach((roundedPoly) => {
+        roundedPoly.forEach((p, i) => {
+          !i && ctx.moveTo(p.in.x * pr, p.in.y * pr)
+          ctx.arcTo(p.x * pr, p.y * pr, p.out.x * pr, p.out.y * pr, p.arc.radius * pr)
+          ctx.lineTo(p.next.in.x * pr, p.next.in.y * pr)
+        })
+      })
+      ctx.fill()
       ctx.stroke()
     })
 

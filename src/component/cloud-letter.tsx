@@ -37,7 +37,7 @@ const CloudLetter = (
 
   // helpers
   const contentRef = useRef(content)
-  const deno = snap ? cloudHeight / snap : 1 // <-- denominator
+  const deno = snap ? cloudHeight / snap : 1 // <-- denominator to handle snapping
 
   if (contentRef.current !== content) {
     everyRef.current.length = 0

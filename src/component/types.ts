@@ -4,16 +4,15 @@ type CloudWordProps = {
 }
 type SpanRef = HTMLSpanElement & { idle: boolean }
 
-// type CSSWordProperties = Partial<{
-//   color: string
-//   font: string
-//   fontFamily: string
-//   fontSize: string
-//   fontStyle: string
-//   fontVariant: string
-//   fontWeight: string
-//   fontStretch: string
-// }>
+type CSSFontProperties = {
+  color: string
+  family: string
+  size: number
+  style?: string
+  variant?: string
+  weight?: string
+  stretch?: string
+}
 
 
 
@@ -25,13 +24,14 @@ type CloudLetterProps = {
   width: number
   spaceWidth: number
   cloudHeight: number
+  font: CSSFontProperties
   padding?: number
 
   mode?: Mode
   align?: Align
   snap?: number
   grid?: boolean
-  // wordStyle?: CSSWordProperties
+
   fill?: string
   stroke?: string
   strokeWidth?: number

@@ -16,6 +16,8 @@ const CloudLetter = (
     width,
     spaceWidth,
     cloudHeight,
+    padding = 10,
+
     align = "left",
     mode = "WORD",
     snap = 0,
@@ -199,7 +201,8 @@ const CloudLetter = (
           "width": `${width}px`,
           "--gap": `${snap ? Math.ceil(spaceWidth / deno) * deno : spaceWidth}px`,
           "--height": `${cloudHeight}px`,
-          "--align": align
+          "--padding": `0 ${padding}px`,
+          "--align": align,
         } as CSSProperties
       }
     >

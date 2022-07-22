@@ -13,8 +13,6 @@ type SpanRef = HTMLSpanElement & { idle: boolean }
 //   fontVariant: string
 //   fontWeight: string
 //   fontStretch: string
-//   lineHeight: string
-//   padding: string
 // }>
 
 
@@ -27,6 +25,8 @@ type CloudLetterProps = {
   width: number
   spaceWidth: number
   cloudHeight: number
+  padding?: number
+
   mode?: Mode
   align?: Align
   snap?: number

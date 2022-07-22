@@ -22,9 +22,9 @@ type Align = "left" | "center" | "right"
 type CloudLetterProps = {
   children: JSX.Element | string | (string | JSX.Element)[] | null
   width: number
-  spaceWidth: number
-  cloudHeight: number
-  font: CSSFontProperties
+  spaceWidth?: number
+  cloudHeight?: number
+  font?: CSSFontProperties
   padding?: number
 
   mode?: Mode

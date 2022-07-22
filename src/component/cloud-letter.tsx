@@ -14,9 +14,8 @@ const CloudLetter = (
   {
     children: content,
     width,
-    spaceWidth,
-    cloudHeight,
-    font,
+    spaceWidth = 48,
+    cloudHeight = 32,
     padding = 10,
 
     align = "left",
@@ -30,6 +29,14 @@ const CloudLetter = (
     shadowOffsetX = -3,
     shadowOffsetY = 5,
     shadowColor = stroke,
+    font = {
+      color: stroke,
+      size: 16,
+      family: "sans-serif",
+      style: "none",
+      variant: "none",
+      weight: "none",
+    },
   }: CloudLetterProps
 ) => {
 
@@ -192,7 +199,7 @@ const CloudLetter = (
           "--gap": `${snap ? Math.ceil(spaceWidth / deno) * deno : spaceWidth}px`,
           "--height": `${cloudHeight}px`,
           "--padding": `0 ${padding}px`,
-          "--padding-idle": `0 ${mode === "PARTIAL" ? font.size / 4 : padding}px`,
+          "--padding-idle": `0 ${mode === "PARTIAL" ? 0 : padding}px`,
           "--margin-partial": `0 ${(mode === "PARTIAL" && snap === 0) ? font.size / 4 : 0}px`,
           "--align": align,
           "--color": font.color,

@@ -8,10 +8,21 @@ v0.0.1
 
 ```typescript
 CloudLetterProps = {
-  children: string | JSX.Element | (string | JSX.Element)[] | null
+  children: JSX.Element | string | (string | JSX.Element)[] | null
   width: number
-  spaceWidth: number
-  cloudHeight: number
+  spaceWidth?: number
+  cloudHeight?: number
+  padding?: number
+  
+  font?: {
+    color: string
+    family: string
+    size: number
+    style?: string
+    variant?: string
+    weight?: string
+    stretch?: string
+  }
 
   mode?: "WORD" | "PARTIAL" | "SPACE"
   align?: "left" | "center" | "right"
@@ -21,5 +32,8 @@ CloudLetterProps = {
   fill?: string
   stroke?: string
   strokeWidth?: number
+  shadowOffsetX?: number
+  shadowOffsetY?: number
+  shadowColor?: string
 }
 ```

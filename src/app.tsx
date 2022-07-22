@@ -1,9 +1,9 @@
 import { FormEvent, useState } from "react"
 import { CloudLetter, CloudWord } from "./component/cloud-letter"
-import { text1, text2 } from "./component/text"
+import { text1, text2 } from "./text"
 
 const width = window.innerWidth
-const mineText = "The ${origin} of the term \"cloud\" can be ${found} in ${the Old English} words clud or clod, meaning a hill or a mass of stone."
+const mineText = "The ${origin} of the term ${\"cloud\"} can be ${found} in ${the Old English} words clud or clod, meaning a hill or a mass of stone."
 // "The $origin$ of the term \"cloud\" can be $found$ in $the Old English$ words clud or clod, meaning a hill or a mass of stone."
 
 export const App = () => {
@@ -166,8 +166,6 @@ export const App = () => {
             <input
               type="number"
               value={snap}
-              min={0}
-              max={4}
               onChange={handleSnapChange}
             />
           </label>

@@ -195,9 +195,12 @@ const CloudLetter = (
           "--padding-idle": `0 ${mode === "PARTIAL" ? font.size / 4 : padding}px`,
           "--margin-partial": `0 ${(mode === "PARTIAL" && snap === 0) ? font.size / 4 : 0}px`,
           "--align": align,
+          "--color": font.color,
           "--font-size": `${font.size}px`,
           "--font-family": font.family,
-          "--color": font.color,
+          "--font-style": font.style,
+          "--font-variant": font.variant,
+          "--font-weight": font.weight,
         } as CSSProperties
       }
     >

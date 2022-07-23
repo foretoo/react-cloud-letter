@@ -15,13 +15,15 @@
   "scripts": {
     "dev": "vite --config ./config/dev.ts",
     "build": "tsc && vite build --config ./config/build.ts",
-    "preview": "vite preview"
+    "public": "tsc && vite build --config ./config/public.ts"
   },
   "dependencies": {
     "polygon-clipping": "^0.15.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "round-polygon": "^0.6.7"
+  },
+  "peerDependencies": {
+    "react": ">= 16.8.0",
+    "react-dom": ">= 16.8.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.15",

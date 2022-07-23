@@ -1,6 +1,6 @@
 {
   "name": "cloud-letter",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "reactwritten cloud letter",
   "keywords": [ "react", "component", "library", "cloud", "word", "unite", "round", "corner" ],
   "author": {

@@ -1,0 +1,43 @@
+p.cloud-letter {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 0;
+  line-height: 0;
+  box-sizing: border-box;
+  text-align: var(--align);
+  white-space: pre-wrap;
+}
+p.cloud-letter > span.cloud-element {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  white-space: pre;
+  color: var(--color);
+  font-size: var(--font-size);
+  font-family: var(--font-family);
+  font-style: var(--font-style);
+  font-variant: var(--font-variant);
+  font-weight: var(--font-weight);
+  line-height: var(--height);
+  text-align: var(--align);
+}
+p.cloud-letter > span.space {
+  padding: 0;
+  width: var(--gap);
+}
+p.cloud-letter > span.fill {
+  padding: var(--padding);
+  margin: var(--margin-partial);
+}
+p.cloud-letter > span.idle {
+  padding: var(--padding-idle);
+}
+p.cloud-letter > canvas.cloud-canvas {
+  position: absolute;
+  z-index: -1;
+}

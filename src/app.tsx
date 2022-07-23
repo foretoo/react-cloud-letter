@@ -14,10 +14,10 @@ export const App = () => {
   const [ content, setContent ] = useState(mineText)
   const [ mode, setMode ] = useState<Mode>("PARTIAL")
   const [ align, setAlign ] = useState<Align>("center")
-  const [ spaceWidth, setSpaceWidth ] = useState(0)
+  const [ spaceWidth, setSpaceWidth ] = useState(8)
   const [ cloudHeight, setCloudHeight ] = useState(33)
   const [ padding, setPadding ] = useState(16)
-  const [ snap, setSnap ] = useState(1)
+  const [ snap, setSnap ] = useState(0)
   const [ grid, setGrid ] = useState(false)
   const [ fill, setFill ] = useState("#ffffff")
   const [ stroke, setStroke ] = useState("#1e90ff")
@@ -33,7 +33,7 @@ export const App = () => {
         cloudHeight={cloudHeight}
         font={{
           color: stroke,
-          family: "Poppins",
+          family: "Verdana",
           size: 16
         }}
         padding={padding}

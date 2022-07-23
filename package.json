@@ -13,7 +13,7 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.js",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --config ./config/dev.ts",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },

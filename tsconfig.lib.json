@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"declaration": true,
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"noImplicitAny": true,
+		"outDir": "dist",
+		"target": "ESNext",
+		"module": "ESNext",
+		"jsx": "react",
+		"moduleResolution": "Node",
+	},
+	"include": ["src/component/index.ts"],
+	"exclude": ["node_modules"]
+}

@@ -8,4 +8,6 @@
 
 - ~~preserve initial widths of spans (when change align from center to left | right, widths of spans don't shrink)~~
 
-- ui in the clouds: grab data from children and draw its clouds via canvas on background 
+- ui in the clouds: grab data from children and draw its clouds via canvas on background
+
+- load Font before app started

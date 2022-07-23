@@ -3,17 +3,20 @@ import react from "@vitejs/plugin-react"
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  mode: "production",
+  publicDir: false,
   plugins: [ react() ],
   build: {
-    // minify: false,
-    assetsDir: ".",
+    lib: {
+      entry: "/src/component/cloud-letter.tsx",
+      name: "cloud-letter",
+      formats: [ "es" ],
+    },
+    minify: false,
     rollupOptions: {
-      input: "/src/index.tsx",
-      // output: {
-      //   dir: "dist",
-      //   assetFileNames: "style.css",
-      //   entryFileNames: "bundle.js",
-      // },
+      output: {
+        assetFileNames: "cloud-style.css",
+      },
       external: [
         "react",
         "react-dom"

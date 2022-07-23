@@ -14,7 +14,7 @@
   "types": "./dist/index.d.js",
   "scripts": {
     "dev": "vite --config ./config/dev.ts",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --config ./config/build.ts",
     "preview": "vite preview"
   },
   "dependencies": {

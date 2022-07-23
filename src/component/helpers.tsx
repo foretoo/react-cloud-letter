@@ -1,3 +1,4 @@
+import React from "react"
 import { RoundedPoint } from "round-polygon"
 import { CloudSpace } from "./cloud-space"
 import { CloudWord } from "./cloud-word"
@@ -15,7 +16,6 @@ export const getCloudMapper = (
   if (mode === "WORD") return <CloudWord key={`${i}-${element}`} idle={false} >{element}</CloudWord>
   if (mode === "SPACE") return <CloudWord key={`${i}-${element}`} idle={true} >{element}</CloudWord>
 
-  // ^\$[^\$]+\$$ | replace \$
   return element.match(/^\$\{[^\$\{]+\}$/g)
     ? <CloudWord key={`${i}-${element}`} idle={false} >{element.replace(/(^\$\{)|(\}$)/g, "")}</CloudWord>
     : <CloudWord key={`${i}-${element}`} idle={true} >{element}</CloudWord>
@@ -60,12 +60,6 @@ export const canvasDebug = (
   cloudRects: CloudRect[],
 ) => {
   const pr = window.devicePixelRatio
-  const findMin = () => (
-    cloudRects.reduce((min, curr) => (
-      curr[0][0][0] < min ? curr[0][0][0] : min
-    ), width)
-  )
-  const min = findMin()
 
   ctx.strokeStyle = "#f74"
   ctx.lineWidth = 1

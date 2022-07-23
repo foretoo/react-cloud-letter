@@ -1,8 +1,7 @@
-import { CSSProperties, useRef, useLayoutEffect } from "react"
+import React, { CSSProperties, useRef, useLayoutEffect } from "react"
 import { CloudLetterProps, CloudRect, SpanRef } from "./types"
 import { split, getCloudMapper, fillPolies } from "./helpers"
 import { cloudContext } from "./context"
-import { CloudWord } from "./cloud-word"
 import polygonBoolean from "polygon-clipping"
 import roundPolygon from "round-polygon"
 import { canvasDebug } from "./helpers"
@@ -10,7 +9,7 @@ import "./cloud.sass"
 
 
 
-const CloudLetter = (
+export const CloudLetter = (
   {
     children: content,
     width,
@@ -44,6 +43,8 @@ const CloudLetter = (
   const everyRef = useRef<SpanRef[]>([])
   const wordsRef = useRef<SpanRef[]>([])
   const spacesRef = useRef<SpanRef[]>([])
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const ctxRef = useRef<CanvasRenderingContext2D | null>(null)
 
   // helpers
   const contentRef = useRef(content)
@@ -57,9 +58,6 @@ const CloudLetter = (
   }
 
 
-
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const ctxRef = useRef<CanvasRenderingContext2D | null>(null)
 
   useLayoutEffect(() => {
     ctxRef.current = canvasRef.current!.getContext("2d")
@@ -221,11 +219,4 @@ const CloudLetter = (
       <canvas ref={canvasRef} className="cloud-canvas"></canvas>
     </p>
   )
-}
-
-
-
-export {
-  CloudLetter,
-  CloudWord,
 }

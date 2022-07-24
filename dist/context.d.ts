@@ -1,3 +1,4 @@
-/// <reference types="react" />
-import { CloudContext } from "./types";
-export declare const cloudContext: import("react").Context<CloudContext>;
+import React, { PropsWithChildren } from "react";
+import { ICloudContext } from "./types";
+export declare const CloudContext: React.Context<ICloudContext>;
+export declare const CloudContextProvider: ({ children }: PropsWithChildren) => JSX.Element;

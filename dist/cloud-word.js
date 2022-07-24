@@ -1,18 +1,19 @@
 import React, { useContext } from "react"
-import { cloudContext } from "./context"
+import { CloudContext } from "./context"
 export const CloudWord = ({ children: content, idle = false }) => {
-  const { every, words } = useContext(cloudContext)
+  const { every, words, elementStyle } = useContext(CloudContext)
   return (React.createElement("span", {
-    className: "cloud-element word",
+    className: "word",
+    style: elementStyle,
     ref: (span) => {
       if (span) {
         if (idle) {
-          span.classList.remove("fill")
-          span.classList.add("idle")
+          span.style.margin = "0"
+          span.style.padding = "var(--padding-idle)"
         }
         else {
-          span.classList.remove("idle")
-          span.classList.add("fill")
+          span.style.padding = "var(--padding)"
+          span.style.margin = "var(--margin-partial)"
         }
         span.idle = idle
         !every.includes(span) && every.push(span)
@@ -21,3 +22,4 @@ export const CloudWord = ({ children: content, idle = false }) => {
     },
   }, content))
 }
+//# sourceMappingURL=cloud-word.js.map

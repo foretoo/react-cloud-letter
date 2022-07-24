@@ -1,4 +1,5 @@
 /// <reference types="react" />
+import { staticStyle } from "./style";
 declare type CloudWordProps = {
     children: string;
     idle?: boolean;
@@ -37,9 +38,10 @@ declare type CloudLetterProps = {
 };
 declare type Point = [number, number];
 declare type CloudRect = [[Point, Point, Point, Point]];
-declare type CloudContext = {
+interface ICloudContext {
+    elementStyle: typeof staticStyle.element;
     every: SpanRef[];
     words: SpanRef[];
     spaces: SpanRef[];
-};
-export { type SpanRef, type Mode, type Align, type CloudWordProps, type CloudLetterProps, type CloudRect, type CloudContext, };
+}
+export { type SpanRef, type Mode, type Align, type CloudWordProps, type CloudLetterProps, type CloudRect, type ICloudContext, };

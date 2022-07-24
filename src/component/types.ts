@@ -1,3 +1,5 @@
+import { staticStyle } from "./style"
+
 type CloudWordProps = {
   children: string
   idle?: boolean
@@ -43,7 +45,8 @@ type CloudLetterProps = {
 type Point = [ number, number ]
 type CloudRect = [[ Point, Point, Point, Point ]]
 
-type CloudContext = {
+interface ICloudContext {
+  elementStyle: typeof staticStyle.element
   every: SpanRef[]
   words: SpanRef[]
   spaces: SpanRef[]
@@ -56,5 +59,5 @@ export {
   type CloudWordProps,
   type CloudLetterProps,
   type CloudRect,
-  type CloudContext,
+  type ICloudContext,
 }

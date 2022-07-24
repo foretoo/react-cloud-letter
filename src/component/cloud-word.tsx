@@ -1,24 +1,26 @@
-import React, { useContext } from "react"
-import { cloudContext } from "./context"
+import React, { CSSProperties, useContext } from "react"
+import { CloudContext } from "./context"
 import { CloudWordProps, SpanRef } from "./types"
 
 export const CloudWord = ({
   children: content,
   idle = false
 }: CloudWordProps) => {
-  const { every, words } = useContext(cloudContext)
+  const { every, words, elementStyle } = useContext(CloudContext)
+
   return (
     <span
-      className="cloud-element word"
+      className="word"
+      style={elementStyle as CSSProperties}
       ref={(span: SpanRef) => {
         if (span) {
           if (idle) {
-            span.classList.remove("fill")
-            span.classList.add("idle")
+            span.style.margin = "0"
+            span.style.padding = "var(--padding-idle)"
           }
           else {
-            span.classList.remove("idle")
-            span.classList.add("fill")
+            span.style.padding = "var(--padding)"
+            span.style.margin = "var(--margin-partial)"
           }
           span.idle = idle
           !every.includes(span) && every.push(span!)

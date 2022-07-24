@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react"
-import { CloudLetter, CloudWord } from "./component/cloud-letter"
+import { CloudLetter, CloudWord } from "./component"
 import { text1, text2 } from "./text"
 
 const width = window.innerWidth

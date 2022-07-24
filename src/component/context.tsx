@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren, useRef } from "react"
+import React, { createContext, PropsWithChildren, useRef } from "react"
 import { staticStyle } from "./style"
 import { ICloudContext, SpanRef } from "./types"
 

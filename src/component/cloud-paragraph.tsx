@@ -1,5 +1,5 @@
-import React, { CSSProperties, useRef, useLayoutEffect, useContext, useEffect } from "react"
-import { CloudLetterProps, CloudRect, SpanRef } from "./types"
+import React, { CSSProperties, useRef, useLayoutEffect, useContext } from "react"
+import { CloudLetterProps, CloudRect } from "./types"
 import { split, getCloudMapper, fillPolies } from "./helpers"
 import { CloudContext } from "./context"
 import polygonBoolean from "polygon-clipping"
@@ -58,12 +58,12 @@ export const CloudParagraph = (
 
 
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     ctxRef.current = canvasRef.current!.getContext("2d")
     ctxRef.current!.lineJoin = "round"
   }, [])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
 
     //// HANDLE WIDTHS, POSITIONS on SNAP
 

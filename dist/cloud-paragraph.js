@@ -5,7 +5,7 @@ import polygonBoolean from "polygon-clipping"
 import roundPolygon from "round-polygon"
 import { staticStyle } from "./style"
 export const CloudParagraph = ({
-  children: content, width, spaceWidth = 48, cloudHeight = 32, padding = 10, align = "left", mode = "WORD", snap = 0, fill = "White", stroke = "DodgerBlue", strokeWidth = 2, shadowOffsetX = -3, shadowOffsetY = 5, shadowColor = stroke, font = {
+  children: content, width, spaceWidth = 8, cloudHeight = 32, padding = 10, align = "left", mode = "WORD", snap = 0, fill = "White", stroke = "DodgerBlue", strokeWidth = 2, shadowOffsetX = -3, shadowOffsetY = 5, shadowColor = stroke, font = {
     color: stroke,
     size: 16,
     family: "sans-serif",
@@ -85,21 +85,21 @@ export const CloudParagraph = ({
     const l = strokeWidth
     const sx = shadowOffsetX
     const sy = shadowOffsetY
-    const _width = width + (Math.abs(sx) > l / 2 ? Math.abs(sx) + l / 2 : l)
-    const _height = height + (Math.abs(sy) > l / 2 ? Math.abs(sy) + l / 2 : l)
+    const _width = width + Math.abs(sx) + l
+    const _height = height + Math.abs(sy) + l
     canvas.width = _width * pr
     canvas.height = _height * pr
     canvas.style.width = `${_width}px`
     canvas.style.height = `${_height}px`
-    canvas.style.top = `${sy < 0 ? (-sy > l / 2 ? sy : -l / 2) : -l / 2}px`
-    canvas.style.left = `${sx < 0 ? (-sx > l / 2 ? sx : -l / 2) : -l / 2}px`
+    canvas.style.top = `${sy < 0 ? (sy - l / 2) : -l / 2}px`
+    canvas.style.left = `${sx < 0 ? (sx - l / 2) : -l / 2}px`
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     if (l > 0)
       ctx.lineWidth = l * pr
     else
       ctx.strokeStyle = "transparent"
-    const offsetY = sy < 0 ? (-sy > l / 2 ? -sy : l / 2) : l / 2
-    const offsetX = sx < 0 ? (-sx > l / 2 ? -sx : l / 2) : l / 2
+    const offsetY = sy < 0 ? (-sy + l / 2) : l / 2
+    const offsetX = sx < 0 ? (-sx + l / 2) : l / 2
     // draw shadow
     ctx.fillStyle = shadowColor
     l > 0 && (ctx.strokeStyle = shadowColor)

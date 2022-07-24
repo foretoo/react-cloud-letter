@@ -28,7 +28,6 @@ declare type CloudLetterProps = {
     mode?: Mode;
     align?: Align;
     snap?: number;
-    grid?: boolean;
     fill?: string;
     stroke?: string;
     strokeWidth?: number;

@@ -3,10 +3,9 @@ import { split, getCloudMapper, fillPolies } from "./helpers"
 import { CloudContext } from "./context"
 import polygonBoolean from "polygon-clipping"
 import roundPolygon from "round-polygon"
-import { canvasDebug } from "./helpers"
 import { staticStyle } from "./style"
 export const CloudParagraph = ({
-  children: content, width, spaceWidth = 48, cloudHeight = 32, padding = 10, align = "left", mode = "WORD", snap = 0, grid = false, fill = "White", stroke = "DodgerBlue", strokeWidth = 2, shadowOffsetX = -3, shadowOffsetY = 5, shadowColor = stroke, font = {
+  children: content, width, spaceWidth = 48, cloudHeight = 32, padding = 10, align = "left", mode = "WORD", snap = 0, fill = "White", stroke = "DodgerBlue", strokeWidth = 2, shadowOffsetX = -3, shadowOffsetY = 5, shadowColor = stroke, font = {
     color: stroke,
     size: 16,
     family: "sans-serif",
@@ -111,7 +110,6 @@ export const CloudParagraph = ({
     l > 0 && (ctx.strokeStyle = stroke)
     ctx.translate(-sx * pr, -sy * pr)
     fillPolies(ctx, multiRoundedPolies, pr)
-    snap && grid && canvasDebug(ctx, width, height, align, snap, cloudRects)
     ctx.setTransform(1, 0, 0, 1, 0, 0)
   })
   const cloudMapper = getCloudMapper(mode)

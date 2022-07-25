@@ -1,6 +1,6 @@
 {
   "name": "react-cloud-letter",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Wrap your letter in lovely cloud-like shape with React.",
   "keywords": [ "react", "component", "library", "cloud", "word", "geometry", "boolean-operations", "unite", "automerge", "round", "corner", "rounded-corners", "polygon" ],
   "author": {
@@ -13,6 +13,14 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.js",
   "files": ["dist"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foretoo/react-cloud-letter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/foretoo/react-cloud-letter/issues"
+  },
+  "homepage": "https://github.com/foretoo/react-cloud-letter#readme",
   "scripts": {
     "dev": "vite --config ./config/dev.ts",
     "build": "rm -rf dist && tsc -p tsconfig.lib.json && eslint --fix dist",

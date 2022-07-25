@@ -1,6 +1,6 @@
 {
   "name": "react-cloud-letter",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Wrap your letter in lovely cloud-like shape with React.",
   "keywords": [ "react", "component", "library", "cloud", "word", "geometry", "boolean-operations", "unite", "automerge", "round", "corner", "rounded-corners", "polygon" ],
   "author": {

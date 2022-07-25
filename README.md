@@ -1,4 +1,4 @@
-# cloud-letter
+# react-cloud-letter
 
 ![preview](./public/readme1.png)
 

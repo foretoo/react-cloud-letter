@@ -18,10 +18,6 @@ export default defineConfig({
         assetFileNames: "style.css",
         entryFileNames: "bundle.js",
       },
-      external: [
-        "react",
-        "react-dom"
-      ],
     }
   },
 })

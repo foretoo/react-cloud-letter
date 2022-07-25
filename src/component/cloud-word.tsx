@@ -1,17 +1,18 @@
 import React, { CSSProperties, useContext } from "react"
 import { CloudContext } from "./context"
+import { staticStyle } from "./helpers"
 import { CloudWordProps, SpanRef } from "./types"
 
 export const CloudWord = ({
   children: content,
   idle = false
 }: CloudWordProps) => {
-  const { every, words, elementStyle } = useContext(CloudContext)
+  const { every, words } = useContext(CloudContext)
 
   return (
     <span
       className="word"
-      style={elementStyle as CSSProperties}
+      style={staticStyle.element as CSSProperties}
       ref={(span: SpanRef) => {
         if (span) {
           if (idle) {

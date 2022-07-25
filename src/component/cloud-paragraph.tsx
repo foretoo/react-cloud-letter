@@ -4,8 +4,7 @@ import { split, getCloudMapper, fillPolies } from "./helpers"
 import { CloudContext } from "./context"
 import polygonBoolean from "polygon-clipping"
 import roundPolygon from "round-polygon"
-import { canvasDebug } from "./helpers"
-import { staticStyle } from "./style"
+import { canvasDebug, staticStyle } from "./helpers"
 
 
 

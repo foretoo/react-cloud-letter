@@ -1,5 +1,4 @@
 import React, { createContext, PropsWithChildren, useRef } from "react"
-import { staticStyle } from "./style"
 import { ICloudContext, SpanRef } from "./types"
 
 
@@ -16,7 +15,6 @@ export const CloudContextProvider = (
   return (
     <CloudContext.Provider
       value={{
-        elementStyle: staticStyle.element,
         every: everyRef.current,
         words: wordsRef.current,
         spaces: spacesRef.current,

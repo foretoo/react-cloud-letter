@@ -1,16 +1,17 @@
 import React, { CSSProperties, useContext } from "react"
 import { CloudContext } from "./context"
 import { SpanRef } from "./types"
+import { staticStyle } from "./helpers"
 
 export const CloudSpace = () => {
-  const { every, spaces, elementStyle } = useContext(CloudContext)
+  const { every, spaces } = useContext(CloudContext)
   return (
     <span
       className="space"
       style={{
         padding: 0,
         width: "var(--gap)",
-        ...elementStyle as CSSProperties}}
+        ...staticStyle.element as CSSProperties}}
       ref={(span: SpanRef) => {
         if (span) {
           !every.includes(span) && every.push(span!)

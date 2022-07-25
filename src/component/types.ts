@@ -24,8 +24,8 @@ type CloudLetterProps = {
   width?: number
   spaceWidth?: number
   cloudHeight?: number
-  font?: CSSFontProperties
   padding?: number
+  radius?: number
 
   mode?: Mode
   align?: Align
@@ -38,6 +38,7 @@ type CloudLetterProps = {
   shadowOffsetX?: number
   shadowOffsetY?: number
   shadowColor?: string
+  font?: CSSFontProperties
 }
 
 type Point = [ number, number ]

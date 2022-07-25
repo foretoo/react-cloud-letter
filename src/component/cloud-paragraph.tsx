@@ -11,30 +11,23 @@ import { canvasDebug, staticStyle } from "./helpers"
 export const CloudParagraph = (
   {
     children: content,
-    width,
-    spaceWidth = 8,
+    width = 360,
+    spaceWidth = 32,
     cloudHeight = 32,
-    padding = 10,
+    padding = 16,
 
     align = "left",
     mode = "WORD",
-    snap = 0,
+    snap = 4,
     grid = false,
 
-    fill = "White",
-    stroke = "DodgerBlue",
+    fill = "white",
+    stroke = "dodgerBlue",
     strokeWidth = 2,
     shadowOffsetX = -3,
     shadowOffsetY = 5,
-    shadowColor = stroke,
-    font = {
-      color: stroke,
-      size: 16,
-      family: "sans-serif",
-      style: "none",
-      variant: "none",
-      weight: "none",
-    },
+    shadowColor = "dodgerBlue",
+    font = staticStyle.fontDefaults,
   }: CloudLetterProps
 ) => {
 
@@ -54,6 +47,16 @@ export const CloudParagraph = (
     spaces.length = 0
     contentRef.current = content
   }
+
+  const {
+    color = staticStyle.fontDefaults.color,
+    size = staticStyle.fontDefaults.fontSize,
+    family = staticStyle.fontDefaults.fontFamily,
+    style = staticStyle.fontDefaults.fontStyle,
+    variant = staticStyle.fontDefaults.fontVariant,
+    weight = staticStyle.fontDefaults.fontWeight,
+    stretch = staticStyle.fontDefaults.fontStretch
+  } = font
 
 
 
@@ -196,14 +199,15 @@ export const CloudParagraph = (
           "--height": `${cloudHeight}px`,
           "--padding": `0 ${padding}px`,
           "--padding-idle": `0 ${mode === "PARTIAL" ? 0 : padding}px`,
-          "--margin-partial": `0 ${(mode === "PARTIAL" && snap === 0) ? font.size / 4 : 0}px`,
+          "--margin-partial": `0 ${(mode === "PARTIAL" && snap === 0) ? size / 4 : 0}px`,
           "--align": align,
-          "--color": font.color,
-          "--font-size": `${font.size}px`,
-          "--font-family": font.family,
-          "--font-style": font.style,
-          "--font-variant": font.variant,
-          "--font-weight": font.weight,
+          "--color": color,
+          "--font-size": `${size}px`,
+          "--font-family": family,
+          "--font-style": style,
+          "--font-variant": variant,
+          "--font-weight": weight,
+          "--font-stretch": stretch,
         } as CSSProperties
       }
     >

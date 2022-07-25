@@ -125,7 +125,17 @@ export const staticStyle = {
     fontStyle: "var(--font-style)",
     fontVariant: "var(--font-variant)",
     fontWeight: "var(--font-weight)",
+    fontStretch: "var(--font-stretch)",
     lineHeight: "var(--height)",
     textAlign: "var(--align)",
   },
+  fontDefaults: {
+    color: "dodgerBlue",
+    fontSize: 16,
+    fontFamily: "sans-serif",
+    fontStyle: "none",
+    fontVariant: "none",
+    fontWeight: "none",
+    fontStretch: "normal"
+  }
 }

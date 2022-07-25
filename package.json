@@ -1,6 +1,6 @@
 {
   "name": "react-cloud-letter",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Wrap your letter in lovely cloud-like shape with React.",
   "keywords": [ "react", "component", "library", "cloud", "word", "geometry", "boolean-operations", "unite", "automerge", "round", "corner", "rounded-corners", "polygon" ],
   "author": {
@@ -12,6 +12,7 @@
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.js",
+  "files": ["dist"],
   "scripts": {
     "dev": "vite --config ./config/dev.ts",
     "build": "rm -rf dist && tsc -p tsconfig.lib.json && eslint --fix dist",

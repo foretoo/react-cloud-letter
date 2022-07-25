@@ -32,7 +32,7 @@ export const App = () => {
       font={{ family: "Verdana" }}
       mode="PARTIAL"
       snap={4}
-      fill={"#dfe"}
+      fill="#dfe"
     >
       {content}
     </CloudLetter>

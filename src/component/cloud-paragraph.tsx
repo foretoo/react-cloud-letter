@@ -15,6 +15,7 @@ export const CloudParagraph = (
     spaceWidth = 32,
     cloudHeight = 32,
     padding = 16,
+    radius = 0.25,
 
     align = "left",
     mode = "WORD",
@@ -26,7 +27,7 @@ export const CloudParagraph = (
     strokeWidth = 2,
     shadowOffsetX = -3,
     shadowOffsetY = 5,
-    shadowColor = "dodgerBlue",
+    shadowColor = stroke,
     font = staticStyle.fontDefaults,
   }: CloudLetterProps
 ) => {
@@ -49,7 +50,7 @@ export const CloudParagraph = (
   }
 
   const {
-    color = staticStyle.fontDefaults.color,
+    color = stroke || staticStyle.fontDefaults.color,
     size = staticStyle.fontDefaults.fontSize,
     family = staticStyle.fontDefaults.fontFamily,
     style = staticStyle.fontDefaults.fontStyle,
@@ -124,7 +125,7 @@ export const CloudParagraph = (
       ))
       .map((polies) => (
         polies.map((poly) => (
-          roundPolygon(poly, cloudHeight / (snap === 1 ? 2 : 4))
+          roundPolygon(poly, cloudHeight * radius)
         ))
       )) : []
 

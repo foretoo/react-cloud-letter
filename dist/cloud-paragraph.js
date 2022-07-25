@@ -3,17 +3,8 @@ import { split, getCloudMapper, fillPolies } from "./helpers"
 import { CloudContext } from "./context"
 import polygonBoolean from "polygon-clipping"
 import roundPolygon from "round-polygon"
-import { staticStyle } from "./style"
-export const CloudParagraph = ({
-  children: content, width, spaceWidth = 8, cloudHeight = 32, padding = 10, align = "left", mode = "WORD", snap = 0, fill = "White", stroke = "DodgerBlue", strokeWidth = 2, shadowOffsetX = -3, shadowOffsetY = 5, shadowColor = stroke, font = {
-    color: stroke,
-    size: 16,
-    family: "sans-serif",
-    style: "none",
-    variant: "none",
-    weight: "none",
-  },
-}) => {
+import { canvasDebug, staticStyle } from "./helpers"
+export const CloudParagraph = ({ children: content, width = 360, spaceWidth = 32, cloudHeight = 32, padding = 16, radius = 0.25, align = "left", mode = "WORD", snap = 4, grid = false, fill = "white", stroke = "dodgerBlue", strokeWidth = 2, shadowOffsetX = -3, shadowOffsetY = 5, shadowColor = stroke, font = staticStyle.fontDefaults }) => {
   const { every, words, spaces } = useContext(CloudContext)
   const letterRef = useRef(null)
   const canvasRef = useRef(null)
@@ -27,6 +18,7 @@ export const CloudParagraph = ({
     spaces.length = 0
     contentRef.current = content
   }
+  const { color = stroke || staticStyle.fontDefaults.color, size = staticStyle.fontDefaults.fontSize, family = staticStyle.fontDefaults.fontFamily, style = staticStyle.fontDefaults.fontStyle, variant = staticStyle.fontDefaults.fontVariant, weight = staticStyle.fontDefaults.fontWeight, stretch = staticStyle.fontDefaults.fontStretch } = font
   useLayoutEffect(() => {
     ctxRef.current = canvasRef.current.getContext("2d")
     ctxRef.current.lineJoin = "round"
@@ -77,7 +69,7 @@ export const CloudParagraph = ({
         poly.pop()
         return poly.map((p) => ({ x: p[0], y: p[1] }))
       })))
-      .map((polies) => (polies.map((poly) => (roundPolygon(poly, cloudHeight / (snap === 1 ? 2 : 4)))))) : []
+      .map((polies) => (polies.map((poly) => (roundPolygon(poly, cloudHeight * radius))))) : []
     //// CANVAS ////
     const pr = window.devicePixelRatio
     const ctx = ctxRef.current
@@ -110,6 +102,7 @@ export const CloudParagraph = ({
     l > 0 && (ctx.strokeStyle = stroke)
     ctx.translate(-sx * pr, -sy * pr)
     fillPolies(ctx, multiRoundedPolies, pr)
+    snap && grid && canvasDebug(ctx, width, height, align, snap, cloudRects)
     ctx.setTransform(1, 0, 0, 1, 0, 0)
   })
   const cloudMapper = getCloudMapper(mode)
@@ -133,14 +126,15 @@ export const CloudParagraph = ({
       "--height": `${cloudHeight}px`,
       "--padding": `0 ${padding}px`,
       "--padding-idle": `0 ${mode === "PARTIAL" ? 0 : padding}px`,
-      "--margin-partial": `0 ${(mode === "PARTIAL" && snap === 0) ? font.size / 4 : 0}px`,
+      "--margin-partial": `0 ${(mode === "PARTIAL" && snap === 0) ? size / 4 : 0}px`,
       "--align": align,
-      "--color": font.color,
-      "--font-size": `${font.size}px`,
-      "--font-family": font.family,
-      "--font-style": font.style,
-      "--font-variant": font.variant,
-      "--font-weight": font.weight,
+      "--color": color,
+      "--font-size": `${size}px`,
+      "--font-family": family,
+      "--font-style": style,
+      "--font-variant": variant,
+      "--font-weight": weight,
+      "--font-stretch": stretch,
     },
   }, content, React.createElement("canvas", { ref: canvasRef, style: { position: "absolute", zIndex: -1 }})))
 }

@@ -29,4 +29,76 @@ export const fillPolies = (ctx, multiPoly, pr) => {
     ctx.stroke()
   })
 }
+export const canvasDebug = (ctx, width, height, align, snap, cloudRects) => {
+  const pr = window.devicePixelRatio
+  ctx.strokeStyle = "#f74"
+  ctx.lineWidth = 1
+  const h = cloudRects[0][0][2][1] - cloudRects[0][0][0][1]
+  const hh = h / snap
+  const proceedX = (fn, y) => {
+    if (align === "left" || align === "center")
+      for (let x = 0; x <= width; x += hh)
+        fn(x, y)
+    else if (align === "right")
+      for (let x = width; x >= 0; x -= hh)
+        fn(x, y)
+  }
+  const drawLine = (x, y) => {
+    ctx.moveTo(x * pr, y * h * pr)
+    ctx.lineTo(x * pr, (y + 1) * h * pr)
+  }
+  ctx.beginPath()
+  for (let y = 0; y < height / h; y++)
+    proceedX(drawLine, y)
+  ctx.stroke()
+  ctx.strokeStyle = "#f40"
+  cloudRects.forEach((multipoly) => {
+    ctx.beginPath()
+    multipoly[0].forEach(([ x, y ], i) => {
+      !i ? ctx.moveTo(x * pr, y * pr) : ctx.lineTo(x * pr, y * pr)
+    })
+    ctx.closePath()
+    ctx.stroke()
+  })
+}
+export const staticStyle = {
+  letter: {
+    position: "relative",
+    margin: 0,
+    padding: 0,
+    border: 0,
+    fontSize: 0,
+    lineHeight: 0,
+    boxSizing: "border-box",
+    textAlign: "var(--align)",
+    whiteSpace: "pre-wrap",
+  },
+  element: {
+    position: "relative",
+    display: "inline-block",
+    margin: 0,
+    padding: 0,
+    border: 0,
+    boxSizing: "border-box",
+    whiteSpace: "pre",
+    color: "var(--color)",
+    fontSize: "var(--font-size)",
+    fontFamily: "var(--font-family)",
+    fontStyle: "var(--font-style)",
+    fontVariant: "var(--font-variant)",
+    fontWeight: "var(--font-weight)",
+    fontStretch: "var(--font-stretch)",
+    lineHeight: "var(--height)",
+    textAlign: "var(--align)",
+  },
+  fontDefaults: {
+    color: "dodgerBlue",
+    fontSize: 16,
+    fontFamily: "sans-serif",
+    fontStyle: "none",
+    fontVariant: "none",
+    fontWeight: "none",
+    fontStretch: "normal",
+  },
+}
 //# sourceMappingURL=helpers.js.map

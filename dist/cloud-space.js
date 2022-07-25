@@ -1,13 +1,14 @@
 import React, { useContext } from "react"
 import { CloudContext } from "./context"
+import { staticStyle } from "./helpers"
 export const CloudSpace = () => {
-  const { every, spaces, elementStyle } = useContext(CloudContext)
+  const { every, spaces } = useContext(CloudContext)
   return (React.createElement("span", {
     className: "space",
     style: {
       padding: 0,
       width: "var(--gap)",
-      ...elementStyle,
+      ...staticStyle.element,
     },
     ref: (span) => {
       if (span) {

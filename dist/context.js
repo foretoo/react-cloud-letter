@@ -1,5 +1,4 @@
 import React, { createContext, useRef } from "react"
-import { staticStyle } from "./style"
 export const CloudContext = createContext({})
 export const CloudContextProvider = ({ children }) => {
   const everyRef = useRef([])
@@ -7,7 +6,6 @@ export const CloudContextProvider = ({ children }) => {
   const spacesRef = useRef([])
   return (React.createElement(CloudContext.Provider, {
     value: {
-      elementStyle: staticStyle.element,
       every: everyRef.current,
       words: wordsRef.current,
       spaces: spacesRef.current,

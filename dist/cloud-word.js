@@ -1,10 +1,11 @@
 import React, { useContext } from "react"
 import { CloudContext } from "./context"
+import { staticStyle } from "./helpers"
 export const CloudWord = ({ children: content, idle = false }) => {
-  const { every, words, elementStyle } = useContext(CloudContext)
+  const { every, words } = useContext(CloudContext)
   return (React.createElement("span", {
     className: "word",
-    style: elementStyle,
+    style: staticStyle.element,
     ref: (span) => {
       if (span) {
         if (idle) {

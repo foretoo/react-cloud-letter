@@ -3,7 +3,7 @@ import { CloudLetter, CloudWord } from "./component"
 import { text1, text2 } from "./text"
 
 const width = window.innerWidth
-const mineText = "The ${origin} of the term ${\"cloud\"} can be ${found} in ${the Old English} words clud or clod, meaning a hill or a mass of stone."
+const mineText = "The ${origin} of the term ${\"cloud\"} can be found\nin ${the Old English} words ${clud or clod,} meaning\na ${hill} or a mass of stone."
 // "The $origin$ of the term \"cloud\" can be $found$ in $the Old English$ words clud or clod, meaning a hill or a mass of stone."
 
 type Mode = "WORD" | "SPACE" | "PARTIAL"
@@ -13,13 +13,13 @@ export const App = () => {
 
   const [ content, setContent ] = useState(mineText)
   const [ mode, setMode ] = useState<Mode>("PARTIAL")
-  const [ align, setAlign ] = useState<Align>("center")
-  const [ spaceWidth, setSpaceWidth ] = useState(8)
+  const [ align, setAlign ] = useState<Align>("left")
+  const [ spaceWidth, setSpaceWidth ] = useState(1)
   const [ cloudHeight, setCloudHeight ] = useState(33)
   const [ padding, setPadding ] = useState(16)
-  const [ snap, setSnap ] = useState(0)
+  const [ snap, setSnap ] = useState(4)
   const [ grid, setGrid ] = useState(false)
-  const [ fill, setFill ] = useState("#ffffff")
+  const [ fill, setFill ] = useState("#ddffee")
   const [ stroke, setStroke ] = useState("#1e90ff")
   const [ shadowOffset, setShadowOffset ] = useState({ x: -3, y: 5 })
 
@@ -37,6 +37,7 @@ export const App = () => {
           size: 16
         }}
         padding={padding}
+        radius={0.333}
 
         align={align}
         mode={mode}

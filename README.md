@@ -2,6 +2,11 @@
 
 ![preview](./public/readme1.png)
 
+[![npm version](https://img.shields.io/badge/npm-v0.2.4-blue)](https://www.npmjs.com/package/react-cloud-letter)
+![minified size](https://img.shields.io/bundlephobia/min/react-cloud-letter)
+![dependencies](https://img.shields.io/librariesio/release/npm/react-cloud-letter)
+![license](https://img.shields.io/github/license/foretoo/react-cloud-letter)
+
 React-based, typed component wraps your (whole or certain pieces of) letter in auto-merged cloud-like shape. Created with respect to [polygon-clipping](https://github.com/mfogel/polygon-clipping) implementation of the Martinez-Rueda-Feito polygon clipping algorithm, and with a little help from my [round-polygon](https://github.com/foretoo/round-polygon) tool.
 
 ### [Demo page](https://foretoo.github.io/react-cloud-letter)

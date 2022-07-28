@@ -1,18 +1,26 @@
 import { defineConfig } from "vite"
-import react from "@vitejs/plugin-react"
+import preact from "@preact/preset-vite"
 
 // https://vitejs.dev/config/
 export default defineConfig({
   mode: "production",
   publicDir: false,
   assetsInclude: ".css",
-  plugins: [ react() ],
+  plugins: [ preact() ],
+  resolve: {
+    alias: {
+      react: "preact/compat",
+      "react-dom/test-utils": "preact/test-utils",
+      "react-dom": "preact/compat",
+      "react/jsx-runtime": "preact/jsx-runtime",
+    },
+  },
   build: {
     minify: true,
     emptyOutDir: false,
     assetsDir: ".",
     rollupOptions: {
-      input: "/src/index.tsx",
+      input: "/src/public.tsx",
       output: {
         dir: "public",
         assetFileNames: "style.css",

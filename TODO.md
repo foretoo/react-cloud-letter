@@ -1,3 +1,5 @@
+- add codesandbox
+
 - provide option to round by max integer (cool effect) 
 
 - [x] store both words ans spaces refs, handle their widths, and grab data from mode related only

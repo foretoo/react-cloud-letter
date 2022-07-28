@@ -4,12 +4,15 @@
 
 [![npm version](https://img.shields.io/badge/npm-v0.2.4-blue)](https://www.npmjs.com/package/react-cloud-letter)
 ![minified size](https://img.shields.io/bundlephobia/min/react-cloud-letter)
-![dependencies](https://img.shields.io/librariesio/release/npm/react-cloud-letter)
 ![license](https://img.shields.io/github/license/foretoo/react-cloud-letter)
 
 React-based, typed component wraps your (whole or certain pieces of) letter in auto-merged cloud-like shape. Created with respect to [polygon-clipping](https://github.com/mfogel/polygon-clipping) implementation of the Martinez-Rueda-Feito polygon clipping algorithm, and with a little help from my [round-polygon](https://github.com/foretoo/round-polygon) tool.
 
-### [Demo page](https://foretoo.github.io/react-cloud-letter)
+</br>
+
+- ### [No-code demo](https://foretoo.github.io/react-cloud-letter)
+- ### [Codesandbox demo](https://codesandbox.io/s/react-cloud-letter-demo-wbt3yc?file=/src/App.js)
+
 </br>
 
 ## Installation
@@ -65,16 +68,16 @@ all params are optional
 | spaceWidth | number | 32 | width of spaces between words in px |
 | cloudHeight | number | 32 | height of words/spaces/clouds in px |
 | padding | number | 16 | horizontal padding of words/clouds in px |
-| radius | number <0-0.5> | 0.25 | ratio to the cloudHeight |
-| mode | "WORD" \| "PARTIAL" \| "SPACE" | "WORD" | elements you whant to wrap. "PARTIAL" works with wrapped in ${...} text parts (see example above and demo), alternatively you can wrap text parts in CloudWord components, which you may import in addition to the CloudLetter component |
-| align | "left" \| "center" \| "right" | "left" | text/clouds horizontal aligning inside the CloudLetter element |
+| radius | number | 0.25 | ratio to the cloudHeight, expected range is 0 to 0.5 |
+| mode | "WORD" \| "PARTIAL" \| "SPACE" | "WORD" | elements you whant to wrap. "PARTIAL" works with wrapped in ${...} text parts (see example above and demo), alternatively you can wrap text parts in CloudWord components, which you may import in addition to the CloudLetter component |
+| align | "left" \| "center" \| "right" | "left" | text/clouds horizontal aligning inside the CloudLetter element |
 | snap | number | 0 | will snaps all elements to a grid defined by ratio of cloudHeight / snap if snap > 0 |
 | grid | boolean | false | debugger, to see the grid defined by the snap option |
 | fill | [CSS Color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value) | "white" | clouds will be filled with color provided |
 | stroke | [CSS Color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value) | "dodgerBlue" | color of clouds stroke |
-| strokeWidth | number | 2 | stroke width |
-| shadowOffsetX | number | -3 | shadow offset on X-axis |
-| shadowOffsetY | number | 5 | shadow offset on Y-axis |
+| strokeWidth | number | 2 | stroke width in px |
+| shadowOffsetX | number | -3 | shadow offset on X-axis in px |
+| shadowOffsetY | number | 5 | shadow offset on Y-axis in px |
 | shadowColor | [CSS Color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value) | stroke | color of shadow, by default takes color of stroke option |
 | font | object | see below | an object with font CSS rules |
 

@@ -96,3 +96,7 @@ all params are optional
 | stretch | string | "normal" | font-stretch CSS rule |
 
 </br>
+
+## ChangeLog
+
+0.2.5 — fix: avoid grid on zero-length cloudRects

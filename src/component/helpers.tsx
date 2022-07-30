@@ -59,6 +59,7 @@ export const canvasDebug = (
   snap: number,
   cloudRects: CloudRect[],
 ) => {
+  if (!cloudRects.length) return
   const pr = window.devicePixelRatio
 
   ctx.strokeStyle = "#f74"

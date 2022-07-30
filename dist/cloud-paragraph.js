@@ -86,10 +86,8 @@ export const CloudParagraph = ({ children: content, width = 360, spaceWidth = 32
     canvas.style.top = `${sy < 0 ? (sy - l / 2) : -l / 2}px`
     canvas.style.left = `${sx < 0 ? (sx - l / 2) : -l / 2}px`
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    if (l > 0)
-      ctx.lineWidth = l * pr
-    else
-      ctx.strokeStyle = "transparent"
+    if (l > 0) ctx.lineWidth = l * pr
+    else ctx.strokeStyle = "transparent"
     const offsetY = sy < 0 ? (-sy + l / 2) : l / 2
     const offsetX = sx < 0 ? (-sx + l / 2) : l / 2
     // draw shadow

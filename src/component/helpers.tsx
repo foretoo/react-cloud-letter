@@ -60,6 +60,7 @@ export const canvasDebug = (
   cloudRects: CloudRect[],
 ) => {
   if (!cloudRects.length) return
+  
   const pr = window.devicePixelRatio
 
   ctx.strokeStyle = "#f74"

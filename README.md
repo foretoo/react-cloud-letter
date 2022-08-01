@@ -2,7 +2,7 @@
 
 ![preview](./public/readme1.png)
 
-[![npm version](https://img.shields.io/badge/npm-v0.2.4-blue)](https://www.npmjs.com/package/react-cloud-letter)
+[![npm version](https://img.shields.io/badge/npm-v0.2.5-blue)](https://www.npmjs.com/package/react-cloud-letter)
 ![minified size](https://img.shields.io/bundlephobia/min/react-cloud-letter)
 ![license](https://img.shields.io/github/license/foretoo/react-cloud-letter)
 

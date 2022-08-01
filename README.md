@@ -6,18 +6,16 @@
 ![minified size](https://img.shields.io/bundlephobia/min/react-cloud-letter)
 ![license](https://img.shields.io/github/license/foretoo/react-cloud-letter)
 
-React-based, typed component wraps your (whole or certain pieces of) letter in auto-merged cloud-like shape. Created with respect to [polygon-clipping](https://github.com/mfogel/polygon-clipping) implementation of the Martinez-Rueda-Feito polygon clipping algorithm, and with a little help from my [round-polygon](https://github.com/foretoo/round-polygon) tool.
+A customizable, easy-to-use React component. It turns your content into auto-merged clouds that are super stylish and attractive to read. You can wrap the whole text, certain parts of it or just spaces.
 
 </br>
 
-- ### [No-code demo](https://foretoo.github.io/react-cloud-letter)
-- ### [Codesandbox demo](https://codesandbox.io/s/react-cloud-letter-demo-wbt3yc?file=/src/App.js)
+**[No-code demo](https://foretoo.github.io/react-cloud-letter)**   |   **[Codesandbox demo](https://codesandbox.io/s/react-cloud-letter-demo-wbt3yc?file=/src/App.js)**
 
 </br>
 
 ## Installation
 
-by npm:
 ```
 npm i react-cloud-letter
 ```
@@ -48,18 +46,20 @@ export const App = () => {
 }
 ```
 
+You can compose this component with Preact, too. In that case make sure you configure [aliasing](https://preactjs.com/guide/v8/switching-to-preact).
+
 </br>
 
 ## Types
-the package contains type declarations (.d.ts-files), but in case you would like to be more explicit, import `CloudLetterProps` in addition
+The package contains type declarations (.d.ts-files), but in case you would like to be more explicit, import `CloudLetterProps` in addition
 ```javascript
 import { CloudLetter, CloudLetterProps } from "react-cloud-letter"
 ```
 
 </br>
 
-## Interface
-all params are optional
+## Configuration
+All properties are optional
 
 | name | type | default | description |
 |---|---|---|---|
@@ -81,9 +81,9 @@ all params are optional
 | shadowColor | [CSS Color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value) | stroke | color of shadow, by default takes color of stroke option |
 | font | object | see below | an object with font CSS rules |
 
-### font options
+### Font options
 
-all params are optional
+All properties are optional
 
 | name | type | default | description |
 |---|---|---|---|
@@ -94,6 +94,12 @@ all params are optional
 | variant | string | "none" | font-variant CSS rule |
 | weight | string | "none" | font-weight CSS rule |
 | stretch | string | "normal" | font-stretch CSS rule |
+
+</br>
+
+## Credits
+
+Created with respect to [polygon-clipping](https://github.com/mfogel/polygon-clipping) implementation of the Martinez-Rueda-Feito polygon clipping algorithm, and with a little help from my [round-polygon](https://github.com/foretoo/round-polygon) tool.
 
 </br>
 

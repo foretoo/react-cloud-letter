@@ -1,43 +1,52 @@
-import { FormEvent, useState } from "react"
+import { useEffect, useState } from "react"
 import { CloudLetter, CloudWord } from "./component"
 import { text1, text2 } from "./text"
 
 const width = window.innerWidth
-const mineText = "The ${origin} of the term ${\"cloud\"} can be found\nin ${the Old English} words ${clud or clod,} meaning\na ${hill} or a mass of stone."
-// "The $origin$ of the term \"cloud\" can be $found$ in $the Old English$ words clud or clod, meaning a hill or a mass of stone."
+const mineText = `The \${origin} of the term \${"cloud"} can be found in \${the Old English} words \${clud or clod}, meaning a hill or a \${mass of stone}.`
+const genText = "Generative art refers to art that in whole or in part has been created with the use of an autonomous system."
+const spaceText =
+`    
+Hyperspace   is
+ a     concept   from          science 
+    fiction relating to  higher dimensions    
+                      `
+const nameText =
+`\${react} \${cloud}    ☁️ ☁️ ☁️
+                \${letter}     🚀`
 
 type Mode = "WORD" | "SPACE" | "PARTIAL"
 type Align = "left" | "center" | "right"
 
 export const App = () => {
 
-  const [ content, setContent ] = useState(mineText)
+  const [ content, setContent ] = useState(spaceText)
   const [ mode, setMode ] = useState<Mode>("PARTIAL")
   const [ align, setAlign ] = useState<Align>("left")
-  const [ spaceWidth, setSpaceWidth ] = useState(1)
-  const [ cloudHeight, setCloudHeight ] = useState(33)
+  const [ spaceWidth, setSpaceWidth ] = useState(10)
+  const [ cloudHeight, setCloudHeight ] = useState(48)
   const [ padding, setPadding ] = useState(16)
-  const [ snap, setSnap ] = useState(4)
-  const [ grid, setGrid ] = useState(false)
-  const [ fill, setFill ] = useState("#ddffee")
-  const [ stroke, setStroke ] = useState("#1e90ff")
-  const [ shadowOffset, setShadowOffset ] = useState({ x: -3, y: 5 })
+  const [ snap, setSnap ] = useState(2)
+  const [ grid, setGrid ] = useState(true)
+  const [ fill, setFill ] = useState("#ffffff")
+  const [ stroke, setStroke ] = useState("#0000ff")
+  const [ shadowOffset, setShadowOffset ] = useState({ x: 0, y: 0 })
 
-    
+
 
   return (
     <>
       <CloudLetter
-        width={Math.min(width * 0.8, 512)}
+        width={Math.min(width * 0.8, 768)}
         spaceWidth={spaceWidth}
         cloudHeight={cloudHeight}
         font={{
-          color: stroke,
+          color: "blue",
           family: "Verdana",
-          size: 16
+          size: 21,
         }}
         padding={padding}
-        radius={0.333}
+        radius={0.25}
 
         align={align}
         mode={mode}
@@ -46,8 +55,10 @@ export const App = () => {
 
         fill={fill}
         stroke={stroke}
+        strokeWidth={2}
         shadowOffsetX={shadowOffset.x}
         shadowOffsetY={shadowOffset.y}
+        shadowColor="blue"
       >
         {content}
         {/* Initial  <CloudWord>Text</CloudWord> <CloudWord>For</CloudWord> <CloudWord>Cloudy</CloudWord> Lettering */}
@@ -185,7 +196,7 @@ export const App = () => {
               <input
                 type="range"
                 min={20}
-                max={50}
+                max={100}
                 step={1}
                 value={cloudHeight}
                 onInput={(e) => setCloudHeight(+(e.target as HTMLInputElement).value)}
